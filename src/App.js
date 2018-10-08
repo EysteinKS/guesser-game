@@ -4,6 +4,8 @@ import './App.css';
 
 import Navigation from "./Navigation";
 import Home from "./pages/Home";
+import WordListContainer from "./components/wordListContainer";
+import TimerContainer from "./components/timerContainer";
 
 
 //TODO
@@ -20,7 +22,7 @@ class App extends Component {
     return (
       <div className="App">
         <Navigation/>
-        <Home/>
+        <WordListContainer/>
       </div>
     );
   }

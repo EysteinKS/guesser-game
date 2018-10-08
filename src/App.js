@@ -6,6 +6,15 @@ import Navigation from "./Navigation";
 import Home from "./pages/Home";
 
 
+//TODO
+//CREATE ROUTES TO OTHER PAGES WITH REACT ROUTER
+//CREATE src/constants and add routes.js
+//CREATE FIREBASE DB AND CONNECT TO API
+//CREATE CONTAINERS IN COMPONENTS
+//CREATE COMPONENTS FOR REUSABLE PARTS
+//CREATE WORD LIST COMPONENT
+
+
 class App extends Component {
   render() {
     return (

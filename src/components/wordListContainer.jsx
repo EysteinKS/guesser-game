@@ -1,42 +1,36 @@
 import React, { Component } from "react";
 
 class WordListContainer extends Component {
-
+    constructor(props){
+        super(props)
+        this.state = {
+            wordArray: [
+                {
+                    word: "Dog",
+                    type: "Noun",
+                    category: "Animal",
+                    difficulty: "Easy"
+                },
+                {
+                    word: "Tree",
+                    type: "Noun",
+                    category: "Plant",
+                    difficulty: "Easy"                    
+                }
+            ]
+        }
+    }
     render(){
-        const wordArray = [
-            wordObject,
-            wordObjectTwo
-        ]
-
-        const wordObject = {
-            word: "Dog",
-            type: "Noun",
-            category: "Animal",
-            difficulty: "Easy"
-        }
-
-        const wordObjectTwo = {
-            word: "Tree",
-            type: "Noun",
-            category: "Plant",
-            difficulty: "Easy"
-        }
-
-        let wordArrayFirst = wordArray[0]
-
-        let wordList = () =>
-            <ul>
-                <p>List</p>
-                <li>{wordArrayFirst.word}</li>
-                <li>{wordArrayFirst.type}</li>
-                <li>{wordArrayFirst.category}</li>
-                <li>{wordArrayFirst.difficulty}</li>
-            </ul>
-
+        
         return(
             <div>
                 <p>The word is:</p>
-                {wordList}
+                <ul>
+                    <li>{this.state.wordArray[0].word}</li>
+                    <li>{this.state.wordArray[0].type}</li>
+                    <li>{this.state.wordArray[0].category}</li>
+                    <li>{this.state.wordArray[0].difficulty}</li>
+                </ul>
             </div>
         )
     }

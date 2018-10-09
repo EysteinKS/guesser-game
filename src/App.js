@@ -25,7 +25,6 @@ class App extends Component {
     return (
       <div className="App">
         <Navigation/>
-        <WordListContainer/>
       </div>
     );
   }

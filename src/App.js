@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Route } from "react-router-dom";
 import './App.css';
 
 import Navigation from "./Navigation";
@@ -23,9 +24,16 @@ import * as routes from "./constants/routes";
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Navigation/>
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <Navigation/>
+          <Route className="full-height" exact path={routes.HOME} component={() => <Home />} />
+          <Route className="full-height" exact path={routes.CREATE} component={() => <Create />} />
+          <Route className="full-height" exact path={routes.JOIN} component={() => <Join />} />
+          <Route className="full-height" exact path={routes.PLAY} component={() => <Play />} />
+          <Route className="full-height" exact path={routes.PROFILE} component={() => <Profile />} />
+        </div>
+      </BrowserRouter>
     );
   }
 }

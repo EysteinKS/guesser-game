@@ -1,20 +1,20 @@
-import React, { Component} from "react";
+import React from "react";
+import {  Link } from "react-router-dom";
+import * as routes from "./constants/routes";
 
-class Navigation extends Component {
-    render(){
-        return(
-            <header>
-                <h1>Navigation</h1>
-                <ul>
-                    <li>Home</li>
-                    <li>Profile</li>
-                    <li>Create</li>
-                    <li>Join</li>
-                    <li>Play</li>
-                </ul>
-            </header>
-        )
-    }
-}
+
+const Navigation = () =>
+    <header>
+        <Link to={routes.HOME}><p>Guesser Game</p></Link>
+        <AuthNavigation/>
+    </header>
+
+const AuthNavigation = () =>
+    <ul>
+        <li><Link className="link" to={routes.PROFILE}>Profile</Link></li>
+        <li><Link className="link" to={routes.CREATE}>Create</Link></li>
+        <li><Link className="link" to={routes.JOIN}>Join</Link></li>
+        <li><Link className="link" to={routes.PLAY}>Play</Link></li>
+    </ul>
 
 export default Navigation;

@@ -2,6 +2,10 @@ import React, {Component} from "react";
 import { firestore } from "../firebase/index"
 import { Store } from "../store/Store"
 
+//TODO
+//MOVE THIS STUFF AWAY FROM HOME!!!
+//CHECK OUT lodash.random TO GET RANDOM WORD FROM DOCUMENT
+
 class Home extends Component {
     constructor(props){
         super(props)

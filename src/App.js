@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 import Navigation from "./Navigation";
 import Home from "./pages/Home";
-import WordListContainer from "./components/wordListContainer";
-import TimerContainer from "./components/timerContainer";
+import Create from "./pages/Create";
+import Join from "./pages/Join";
+import Play from "./pages/Play";
+import Profile from "./pages/Profile";
+
+import * as routes from "./constants/routes";
 
 
 //TODO

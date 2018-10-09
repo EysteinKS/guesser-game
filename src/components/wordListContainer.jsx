@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 
-class wordListContainer extends Component {
-    constructor(props){
-        super(props)
-    }
-    
+class WordListContainer extends Component {
+
     render(){
+        const wordArray = [
+            wordObject,
+            wordObjectTwo
+        ]
+
         const wordObject = {
             word: "Dog",
             type: "Noun",
@@ -13,16 +15,38 @@ class wordListContainer extends Component {
             difficulty: "Easy"
         }
 
+        const wordObjectTwo = {
+            word: "Tree",
+            type: "Noun",
+            category: "Plant",
+            difficulty: "Easy"
+        }
+
+        let wordArrayFirst = wordArray[0]
+
+        let wordList = () =>
+            <ul>
+                <p>List</p>
+                <li>{wordArrayFirst.word}</li>
+                <li>{wordArrayFirst.type}</li>
+                <li>{wordArrayFirst.category}</li>
+                <li>{wordArrayFirst.difficulty}</li>
+            </ul>
+
         return(
-            
             <div>
-                <p>The word is: {wordObject.word}</p>
-                <p>The type is: {wordObject.type}</p>
-                <p>The category is: {wordObject.category}</p>
-                <p>The difficulty is: {wordObject.difficulty}</p>
+                <p>The word is:</p>
+                {wordList}
             </div>
         )
     }
 }
 
-export default wordListContainer;
+export default WordListContainer;
+
+/*
+TODO:
+-Choose Type, Category and/or Difficulty before starting timer
+-Display Word, Type, Category and Difficulty in container
+-Skip word
+*/

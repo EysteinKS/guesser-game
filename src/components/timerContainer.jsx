@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class timerContainer extends Component {
+class TimerContainer extends Component {
     render(){
         return(
             <h1>Hello</h1>
@@ -8,4 +8,12 @@ class timerContainer extends Component {
     }
 }
 
-export default timerContainer;
+export default TimerContainer;
+
+/*
+TODO:
+-Create a countdown
+-Choose time on countdown
+-Start, pause and stop countdown
+-Send "Ready" request to players when current player presses Start
+*/

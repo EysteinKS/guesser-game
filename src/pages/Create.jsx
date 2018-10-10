@@ -72,6 +72,7 @@ class Create extends Component {
                     </input>
                     <input type="submit" value="Submit"></input>
                 </form>
+                <h3>{Store["createWordCondition"]}</h3>
             </section>
         )
     }

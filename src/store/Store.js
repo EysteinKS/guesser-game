@@ -6,6 +6,7 @@ export const Store = new Listenable({
         dictionary: "",
         currentWord: "",
         currentType: "",
-        DifficultyLength: ""
+        DifficultyLength: "",
+        createWordCondition: "Ready to submit new word",
     }
 })

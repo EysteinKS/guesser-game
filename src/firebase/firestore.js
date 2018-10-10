@@ -72,6 +72,7 @@ export const setLengthOfDifficulty = ( lang, diff, newLength ) => {
 //GENERATE A NEW WORD IN DICTIONARY
 
 export const setNewWordInDictionary = ( lang, diff, newWord, newType, newCategory ) => {
+    Store.set({ ["createWordCondition"]: "Saving new word..."})
     getLengthOfDifficulty( lang, diff )
     .then(() => {
         let newDifficultyLength = (Number(Store["DifficultyLength"]) + 1)
@@ -83,6 +84,10 @@ export const setNewWordInDictionary = ( lang, diff, newWord, newType, newCategor
             category: newCategory
         })
         setLengthOfDifficulty( lang, diff, newDifficultyLength)
+        Store.set({ ["createWordCondition"]: "Word saved!"})
     })
-    .catch((error) => console.log(error))
+    .catch((error) => {
+        console.log(error)
+        Store.set({ ["createWordCondition"]: "Error saving word"})
+    })
 }

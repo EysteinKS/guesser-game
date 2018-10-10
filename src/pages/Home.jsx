@@ -25,7 +25,7 @@ class Home extends Component {
             this.setState({ loadedWord: !this.state.loadedWord})
         }
         firestore.getWordByDifficultyAndLanguage("English", "Easy", `Word${this.state.currentWord}`);
-        firestore.getLenghtOfDifficulty("English", "Easy");
+        firestore.getLengthOfDifficulty("English", "Easy");
         if (this.state.currentWord < Store["DifficultyLength"]){
             this.setState({
                 currentWord: this.state.currentWord + 1

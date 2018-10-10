@@ -14,7 +14,6 @@ export const getWordByDifficultyAndLanguage = (lang, diff, word) =>
                 let currentWord = doc.data();
                 console.log("The word is:", currentWord.word)
                 Store.set({ ["currentWord"]: currentWord.word, ["currentType"]: currentWord.type, ["currentCategory"]: currentWord.category })
-                console.log(Store["currentCategory"])
             } else {
                 console.log("Dictionary not found")
             }
@@ -31,15 +30,12 @@ export const getLengthOfDifficulty = (lang, diff) =>
             let currentDocument = doc.data();
             switch(diff){
                 case("Easy"):
-                    console.log("The length of Easy is: ", currentDocument.EasyLength)
                     Store.set({ ["DifficultyLength"]: currentDocument.EasyLength})
                     break;
                 case("Medium"):
-                    console.log("The length of Medium is: ", currentDocument.MediumLength)
                     Store.set({ ["DifficultyLength"]: currentDocument.MediumLength})
                     break;
                 case("Hard"):
-                    console.log("The length of Hard is: ", currentDocument.HardLength)
                     Store.set({ ["DifficultyLength"]: currentDocument.HardLength})
                     break;
                 default:

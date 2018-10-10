@@ -11,9 +11,13 @@ class Home extends Component {
         super(props)
         Store.addListener(this.onChange)
         this.state = {
-            currentWord: 1,
             loadedWord: false
         }
+    }
+
+    componentWillMount() {
+        firestore.getWordByDifficultyAndLanguage("English", "Easy", `Word${Store["wordDoc"]}`)
+        firestore.getLengthOfDifficulty("English", "Easy");
     }
 
     componentWillUnmount() {
@@ -21,20 +25,17 @@ class Home extends Component {
     }
 
     onClick = () => {
+        console.log("Button Clicked")
         if (this.state.loadedWord == false){
             this.setState({ loadedWord: !this.state.loadedWord})
         }
-        firestore.getWordByDifficultyAndLanguage("English", "Easy", `Word${this.state.currentWord}`);
-        firestore.getLengthOfDifficulty("English", "Easy");
-        if (this.state.currentWord < Store["DifficultyLength"]){
-            this.setState({
-                currentWord: this.state.currentWord + 1
-            })
+        if (Store["wordDoc"] < Store["DifficultyLength"]){
+            Store.set({ ["wordDoc"]: (Number(Store["wordDoc"]) + 1)})
+            console.log()
         } else {
-            this.setState({
-                currentWord: 1
-            })
+            Store.set({ ["wordDoc"]: 1 })
         }
+        firestore.getWordByDifficultyAndLanguage("English", "Easy", `Word${Store["wordDoc"]}`);
     }
 
     onChange = () => {
@@ -48,6 +49,7 @@ class Home extends Component {
                 <h1>Home</h1>
                 <button onClick={this.onClick}>Get English Dictionary</button>
                 <ul>
+                    <li>Current word is Word{Store["wordDoc"]}</li>
                     <li>{Store["currentWord"]}</li>
                     <li>{Store["currentType"]}</li>
                     <li>{Store["currentCategory"]}</li>

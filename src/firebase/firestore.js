@@ -52,13 +52,13 @@ export const setLengthOfDifficulty = ( lang, diff, newLength ) => {
     switch(diff){
         case("Easy"):
             console.log("New length of Easy is: ", newLength)
-            dictionaryRef.doc(lang).set({ EasyLength: newLength});
+            dictionaryRef.doc(lang).set({ EasyLength: newLength, MediumLength: dictionaryRef.doc(lang).MediumLength, HardLength: dictionaryRef.doc(lang).HardLength});
             break;
         case("Medium"):
-            dictionaryRef.doc(lang).set({ MediumLength: newLength});
+            dictionaryRef.doc(lang).set({ EasyLength: dictionaryRef.doc(lang).EasyLength, MediumLength: newLength, HardLength: dictionaryRef.doc(lang).HardLength});
             break;
         case("Hard"):
-            dictionaryRef.doc(lang).set({ HardLength: newLength});
+            dictionaryRef.doc(lang).set({ EasyLength: dictionaryRef.doc(lang).EasyLength, MediumLength: dictionaryRef.doc(lang).MediumLength, HardLength: newLength});
             break;       
         default:
             break;     

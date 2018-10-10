@@ -11,13 +11,15 @@ class Home extends Component {
         super(props)
         Store.addListener(this.onChange)
         this.state = {
-            loadedWord: false
+            loadedWord: false,
+            chooseLanguage: "English",
+            chooseDifficulty: "Easy",
         }
     }
 
     componentWillMount() {
-        firestore.getWordByDifficultyAndLanguage("English", "Easy", `Word${Store["wordDoc"]}`)
-        firestore.getLengthOfDifficulty("English", "Easy");
+        firestore.getWordByDifficultyAndLanguage(this.state.chooseLanguage, this.state.chooseDifficulty, `Word${Store["wordDoc"]}`)
+        firestore.getLengthOfDifficulty(this.state.chooseLanguage, this.state.chooseDifficulty);
     }
 
     componentWillUnmount() {
@@ -35,19 +37,33 @@ class Home extends Component {
         } else {
             Store.set({ ["wordDoc"]: 1 })
         }
-        firestore.getWordByDifficultyAndLanguage("English", "Easy", `Word${Store["wordDoc"]}`);
+        firestore.getWordByDifficultyAndLanguage(this.state.chooseLanguage, this.state.chooseDifficulty, `Word${Store["wordDoc"]}`);
     }
 
     onChange = () => {
         this.forceUpdate()
     }
 
+    handleChange = (event) =>
+    this.setState({ [event.target.name]: event.target.value })
+
     render(){
 
         return(
             <section>
                 <h1>Home</h1>
-                <button onClick={this.onClick}>Get English Dictionary</button>
+                <form>
+                    <select name="chooseLanguage" value={this.state.chooseLanguage} onChange={this.handleChange}>
+                        <option value="English">English</option>
+                        <option value="Norwegian">Norwegian</option>
+                    </select>
+                    <select name="chooseDifficulty" value={this.state.chooseDifficulty} onChange={this.handleChange}>
+                        <option value="Easy">Easy</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Hard">Hard</option>
+                    </select>>
+                </form>
+                <button onClick={this.onClick}>Get New Word</button>
                 <ul>
                     <li>Current word is Word{Store["wordDoc"]}</li>
                     <li>{Store["currentWord"]}</li>

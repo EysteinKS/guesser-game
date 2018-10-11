@@ -1,6 +1,4 @@
 import React, {Component} from "react";
-import { firestore } from "../firebase/index"
-import { Store } from "../store/Store"
 import Magnus from "../Magnus"
 import WordListContainer from "../components/WordListContainer"
 

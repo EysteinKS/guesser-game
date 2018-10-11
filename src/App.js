@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from "react-router-dom";
 import './css/App.css';
 
-import Navigation from "./Navigation";
+import Navigation from "./components/Navigation";
 import Home from "./pages/Home";
 import Create from "./pages/Create";
 import Join from "./pages/Join";
@@ -13,12 +13,9 @@ import * as routes from "./constants/routes";
 
 
 //TODO
-//CREATE ROUTES TO OTHER PAGES WITH REACT ROUTER
-//CREATE src/constants and add routes.js
 //CREATE FIREBASE DB AND CONNECT TO API
 //CREATE CONTAINERS IN COMPONENTS
 //CREATE COMPONENTS FOR REUSABLE PARTS
-//CREATE WORD LIST COMPONENT
 
 
 class App extends Component {

@@ -12,14 +12,13 @@ export const getWordByDifficultyAndLanguage = (lang, diff, word) =>
         .then((doc) => {
             if (doc.exists) {
                 let currentWord = doc.data();
-                console.log("The word is:", currentWord.word)
                 Store.set({ ["currentWord"]: currentWord.word, ["currentType"]: currentWord.type, ["currentCategory"]: currentWord.category })
             } else {
                 console.log("Dictionary not found")
             }
         })
         .catch((error) => 
-        console.log("Error getting document: ", error)
+            console.log("Error getting document: ", error)
     )
 
 //CHECK LENGTH OF DIFFICULTY WORD LIST
@@ -47,7 +46,6 @@ export const getLengthOfDifficulty = (lang, diff) =>
             let currentMediumLength = Store["MediumLength"]
             let currentHardLength = Store["HardLength"]
             
-            console.log(`Easy is ${currentEasyLength} long, Medium is ${currentMediumLength} long and Hard is ${currentHardLength} long`)
         })
         .catch((error) =>
         console.log("Error getting document: ", error)

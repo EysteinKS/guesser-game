@@ -38,7 +38,7 @@ class CreateWordContainer extends Component {
     render(){
         return(
             <section>
-                <h3>Create New Word</h3>
+                <h2>Create New Word</h2>
                 <form onSubmit={this.newWord}>
                     <select name="newDifficulty" value={this.state.newDifficulty} onChange={this.handleChange}>
                         <option value="Easy">Easy</option>
@@ -70,7 +70,7 @@ class CreateWordContainer extends Component {
                         onChange={this.handleChange}
                         placeholder="Word Category">
                     </input>
-                    <input type="submit" value="Submit"></input>
+                    <input className="submit" type="submit" value="Submit"></input>
                 </form>
                 <h3>{Store["createWordCondition"]}</h3>
             </section>

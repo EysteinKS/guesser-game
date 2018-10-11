@@ -1,5 +1,14 @@
 h3 {
     color: gray;
-
+    font-style: initial;
 }
 
+h2 {
+    color: rgb(204, 124, 250);
+    font-style: inherit ;
+    font-family: sans-serif;
+}
+
+.submit{
+    
+}

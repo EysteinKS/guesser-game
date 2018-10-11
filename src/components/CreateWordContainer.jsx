@@ -10,8 +10,8 @@ class CreateWordContainer extends Component {
             newDifficulty: "Easy",
             newLanguage: "English",
             newWord: "",
-            newType: "",
-            newCategory: ""
+            newType: "Noun",
+            newCategory: "Plant"
         }
     }
 
@@ -56,20 +56,17 @@ class CreateWordContainer extends Component {
                         onChange={this.handleChange}
                         placeholder="New Word">
                     </input>
-                    <input
-                        name="newType"
-                        type="text"
-                        value={this.state.newType}
-                        onChange={this.handleChange}
-                        placeholder="Word Type">
-                    </input>
-                    <input
-                        name="newCategory"
-                        type="text"
-                        value={this.state.newCategory}
-                        onChange={this.handleChange}
-                        placeholder="Word Category">
-                    </input>
+                    <select name="newType" value={this.state.newType} onChange={this.handleChange}>
+                        <option value="Noun">Noun</option>
+                        <option value="Verb">Verb</option>
+                        <option value="Adjective">Adjective</option>
+                    </select>
+                    <select name="newCategory" value={this.state.newCategory} onChange={this.handleChange}>
+                        <option value="Plant">Plant</option>
+                        <option value="Animal">Animal</option>
+                        <option value="Mineral">Mineral</option>
+                        <option value="Abstract">Abstract</option>
+                    </select>
                     <input type="submit" value="Submit"></input>
                 </form>
                 <h3>{Store["createWordCondition"]}</h3>

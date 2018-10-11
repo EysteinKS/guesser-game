@@ -9,6 +9,9 @@ export const Store = new Listenable({
         currentType: "",
         currentCategory: "",
         DifficultyLength: "",
+        EasyLength: "",
+        MediumLength: "",
+        HardLength: "",
         createWordCondition: "Ready to submit new word",
     }
 })

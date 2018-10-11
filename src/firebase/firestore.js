@@ -41,6 +41,13 @@ export const getLengthOfDifficulty = (lang, diff) =>
                 default:
                     break;
             }
+            Store.set({ ["EasyLength"]: currentDocument.EasyLength, ["MediumLength"]: currentDocument.MediumLength, ["HardLength"]: currentDocument.HardLength })
+            
+            let currentEasyLength = Store["EasyLength"]
+            let currentMediumLength = Store["MediumLength"]
+            let currentHardLength = Store["HardLength"]
+            
+            console.log(`Easy is ${currentEasyLength} long, Medium is ${currentMediumLength} long and Hard is ${currentHardLength} long`)
         })
         .catch((error) =>
         console.log("Error getting document: ", error)
@@ -49,16 +56,20 @@ export const getLengthOfDifficulty = (lang, diff) =>
 //SET NEW LENGTH OF DIFFICULTY WORD LIST
 
 export const setLengthOfDifficulty = ( lang, diff, newLength ) => {
+    console.log(`Setting length of ${diff}`)
+    
     switch(diff){
         case("Easy"):
             console.log("New length of Easy is: ", newLength)
-            dictionaryRef.doc(lang).set({ EasyLength: newLength, MediumLength: dictionaryRef.doc(lang).MediumLength, HardLength: dictionaryRef.doc(lang).HardLength});
+            dictionaryRef.doc(lang).update({ EasyLength: newLength });
             break;
         case("Medium"):
-            dictionaryRef.doc(lang).set({ EasyLength: dictionaryRef.doc(lang).EasyLength, MediumLength: newLength, HardLength: dictionaryRef.doc(lang).HardLength});
+            console.log("New length of Medium is: ", newLength)
+            dictionaryRef.doc(lang).update({ MediumLength: newLength });
             break;
         case("Hard"):
-            dictionaryRef.doc(lang).set({ EasyLength: dictionaryRef.doc(lang).EasyLength, MediumLength: dictionaryRef.doc(lang).MediumLength, HardLength: newLength});
+            console.log("New length of Hard is: ", newLength)
+            dictionaryRef.doc(lang).update({ HardLength: newLength });
             break;       
         default:
             break;     

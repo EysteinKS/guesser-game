@@ -96,3 +96,10 @@ export const setNewWordInDictionary = ( lang, diff, newWord, newType, newCategor
         Store.set({ ["createWordCondition"]: "Error saving word"})
     })
 }
+
+//CREATE USER WITH USERNAME AND EMAIL
+export const doCreateUser = (id, u, e) =>
+    firestore.collection("Users").doc(id).set({
+        username: u,
+        email: e
+    })

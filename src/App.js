@@ -13,6 +13,7 @@ import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 
 import * as routes from "./constants/routes";
+import withAuthentication from "./withAuthentication";
 
 
 //TODO
@@ -41,4 +42,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withAuthentication(App);

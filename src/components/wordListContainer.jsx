@@ -8,7 +8,6 @@ class WordListContainer extends Component {
         super(props)
         Store.addListener(this.onChange)
         this.state = {
-            loadedWord: false,
             chooseLanguage: "English",
             chooseDifficulty: "Easy",
         }
@@ -69,7 +68,7 @@ class WordListContainer extends Component {
                         <option value="Easy">Easy</option>
                         <option value="Medium">Medium</option>
                         <option value="Hard">Hard</option>
-                    </select>>
+                    </select>
                 </form>
                 <button onClick={this.onClick}>Get New Word</button>
                 <ul>

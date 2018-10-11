@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import MembersContainer from "../components/membersContainer";
-import TimerContainer from "../components/timerContainer";
+import MembersContainer from "../components/MembersContainer";
+import TimerContainer from "../components/TimerContainer";
 import WordListContainer from "../components/WordListContainer";
 
 class Play extends Component {

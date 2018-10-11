@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import { firestore } from "../firebase/index"
 import { Store } from "../store/Store"
+import Magnus from "../Magnus"
 
 //TODO
 //MOVE THIS STUFF AWAY FROM HOME!!!
@@ -24,6 +25,11 @@ class Home extends Component {
 
     componentWillUnmount() {
         Store.removeListener(this.onChange)
+    }
+
+    onMagnus = () => {
+        console.log("Starting Magnus")
+        Magnus()
     }
 
     onClick = () => {
@@ -52,6 +58,7 @@ class Home extends Component {
         return(
             <section>
                 <h1>Home</h1>
+                <button onClick={this.onMagnus}>Magnus</button>
                 <form>
                     <select name="chooseLanguage" value={this.state.chooseLanguage} onChange={this.handleChange}>
                         <option value="English">English</option>

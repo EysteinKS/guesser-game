@@ -1,0 +1,29 @@
+header {
+    background-color: blue;
+    margin-top: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+header div {
+    margin: 0px;
+    padding: 0px;
+}
+
+.headerList {
+    align-content: center;
+    background-color: lightblue;
+    padding: 0px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 0px;
+}
+
+.headerLink {
+    text-align: center;
+    color: white;
+    width: 100vw;
+    padding: 10px;
+    border-bottom: 1px solid black;
+    background-clip: padding-box;
+}

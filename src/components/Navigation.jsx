@@ -4,6 +4,7 @@ import * as routes from "../constants/routes";
 import AuthUserContext from "../AuthUserContext";
 import SignOutButton from "../components/SignOut";
 import DropdownMenu from "./DropdownMenu";
+import "../css/Navigation.css"
 
 const Navigation = () =>
     <header>
@@ -17,17 +18,17 @@ const Navigation = () =>
     </header>
 
 const NavigationAuth = () =>
-    <ul>
-        <li><Link className="link" to={routes.PROFILE}>Profile</Link></li>
-        <li><Link className="link" to={routes.CREATE}>Create</Link></li>
-        <li><Link className="link" to={routes.JOIN}>Join</Link></li>
-        <li><Link className="link" to={routes.PLAY}>Play</Link></li>
-        <li><SignOutButton /></li>
+    <ul className="headerList">
+        <li className="headerLink"><Link to={routes.PROFILE}>Profile</Link></li>
+        <li className="headerLink"><Link to={routes.CREATE}>Create</Link></li>
+        <li className="headerLink"><Link to={routes.JOIN}>Join</Link></li>
+        <li className="headerLink"><Link to={routes.PLAY}>Play</Link></li>
+        <li className="headerLink"><SignOutButton /></li>
     </ul>
 
 const NavigationNonAuth = () =>
-    <ul>
-        <li><Link className="link" to={routes.SIGN_IN}>Sign In</Link></li>
+    <ul className="headerList">
+        <li><Link className="headerLink" to={routes.SIGN_IN}>Sign In</Link></li>
     </ul>
 
 export default Navigation;

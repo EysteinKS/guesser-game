@@ -12,7 +12,6 @@ class DropdownMenu extends Component {
   
   showMenu = (event) => {
     event.preventDefault();
-    console.log("Opening menu")
 
     this.setState({ showMenu: true }, () => {
       document.addEventListener('click', this.closeMenu);
@@ -20,7 +19,6 @@ class DropdownMenu extends Component {
   }
   
   closeMenu = (event) => {
-    console.log("Closing menu")
     if (!this.dropdownMenu.contains(event.target)) {
       
       this.setState({ showMenu: false }, () => {

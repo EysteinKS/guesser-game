@@ -14,13 +14,19 @@ export const Store = new Listenable({
         HardLength: "",
         createWordCondition: "Ready to submit new word",
         loggedIn: "false",
-        userDataLoaded: "false",
-        userDataLoadingMessage: "Loading user data..."
     }
 })
 
 export const UserStore = new Listenable({
     initialstate: {
-        
+        Username: "",
+        Permission: "",
+        userDataLoaded: ""
+    }
+})
+
+export const SessionStore = new Listenable({
+    initialstate: {
+        sessionID: ""
     }
 })

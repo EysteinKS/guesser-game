@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 import CreateWordContainer from "../components/CreateWordContainer"
+import SessionContainer from "../components/SessionContainer"
+
 import "../css/Create.css"
 class Create extends Component {
     constructor(props){
@@ -11,6 +13,7 @@ class Create extends Component {
             <section>
                 <h1>Create</h1>
                 <CreateWordContainer/>
+                <SessionContainer/>
             </section>
         )
     }

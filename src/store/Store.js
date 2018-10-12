@@ -27,6 +27,7 @@ export const UserStore = new Listenable({
 
 export const SessionStore = new Listenable({
     initialstate: {
-        sessionID: ""
+        sessionID: "",
+        uid: ""
     }
 })

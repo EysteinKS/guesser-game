@@ -25,10 +25,11 @@ export const getUser = () =>
 export const getUserData = () => {
   console.log("Getting user data")
   let user = firestore.collection("Users").doc(getUser().uid)
+  const userid = getUser().uid
   user.get()
     .then((snapshot) => {
       const data = snapshot.data()
-      UserStore.set({ ["Username"]: data.username, ["Permission"]: data.permission, ["userDataLoaded"]: "true", })
+      UserStore.set({ ["Username"]: data.username, ["Permission"]: data.permission, ["userDataLoaded"]: "true", ["uid"]: userid })
       console.log("User data stored")
     })
     .catch((error) => 

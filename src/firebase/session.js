@@ -1,5 +1,5 @@
 import { firestore, auth } from "./firebase";
-import { SessionStore } from "../store/Store"
+import { SessionStore, UserStore } from "../store/Store"
 
 const sessionRef = firestore.collection("Sessions");
 const liveSessionsRef = sessionRef.doc("SessionData").collection("LiveSessions");
@@ -8,17 +8,21 @@ const usersRef = firestore.collection("Users");
 //Creation
 
 export const createSession = () => {
-    let sessionHost = { host: auth.getUser().username }
-    sessionRef.add(sessionHost)
+    let sessionHost = { host: UserStore["Username"] }
+    console.log(`Creating session with ${UserStore["Username"]} as host`)
+    liveSessionsRef.add(sessionHost)
         .then((docRef) => {
-            //Send host to lobby page
             SessionStore.set({ ["sessionID"]: docRef.id })
+            generateKey(docRef.id)
+            setKey()
+            joinSession(SessionStore["sessionID"])
+            //Send host to lobby page
         })
         .catch((error) => console.log(error))
 }
 
 const keyGeneratorEnum = {
-    "1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "10": 10,
+    "1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "0": 10,
     "a": 11, "b": 12, "c": 13, "d": 14, "e": 15, "f": 16, "g": 17, "h": 18, "i": 19, "j": 20,
     "k": 21, "l": 22, "m": 23, "n": 24, "o": 25, "p": 26, "q": 27, "r": 28, "s": 29, "t": 30,
     "u": 31, "v": 32, "w": 33, "x": 34, "y": 35, "z": 36,
@@ -29,12 +33,12 @@ const keyGeneratorEnum = {
 Object.freeze(keyGeneratorEnum)
 
 //Used to turn number into key from keyGeneratorEnum
-export const getKeyByValue = (object, value) => {
+const getKeyByValue = (object, value) => {
     return Object.keys(object).find(key => object[key] === value);
   }
 
 //Calculates a new enum from number
-export const calculateEnum = (stringEnum) => {
+const calculateEnum = (stringEnum) => {
     console.log("Current stringEnum is", stringEnum)
     let returnKey;
 
@@ -50,6 +54,7 @@ export const calculateEnum = (stringEnum) => {
     }
 }
 
+//Generates the session key
 export const generateKey = session => {
 
     let sessionString = session.toString()
@@ -106,10 +111,12 @@ export const generateKey = session => {
     SessionStore.set({ ["SessionKey"]: sessionKey })
 }
 
+//Sets the key in session database, and stores it so people can join the session
 export const setKey = () => {
+    console.log(`Saving key as ${SessionStore["SessionKey"]} to sessionID ${SessionStore["sessionID"]}`)
     liveSessionsRef.doc(SessionStore["sessionID"]).update({ sessionID: SessionStore["SessionKey"] })
-    .then(() => console.log("Key saved in session database"))
-    .catch((error) => console.log(error))
+        .then(() => console.log("Key saved in session database"))
+        .catch((error) => console.log(error))
 }
 
 export const setRules = () => {
@@ -124,8 +131,9 @@ export const lockSession = () => {
 
 }
 
-export const joinSession = () => {
-
+export const joinSession = ( session ) => {
+    console.log(`Adding user ${UserStore["Username"]} with uid ${UserStore["uid"]} to session ${session}`)
+    usersRef.doc(UserStore["uid"]).update({     })
 }
 
 export const kickPlayer = () => {

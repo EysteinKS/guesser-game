@@ -14,8 +14,6 @@ header div {
     align-content: center;
     background-color: lightblue;
     padding: 0px;
-    padding-top: 5px;
-    padding-bottom: 5px;
     margin: 0px;
 }
 
@@ -26,4 +24,8 @@ header div {
     padding: 10px;
     border-bottom: 1px solid black;
     background-clip: padding-box;
+}
+
+li:hover {
+    background: aqua;
 }

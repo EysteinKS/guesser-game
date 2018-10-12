@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import {  Link } from "react-router-dom";
 import * as routes from "../constants/routes";
 import AuthUserContext from "../AuthUserContext";
@@ -6,16 +6,26 @@ import SignOutButton from "../components/SignOut";
 import DropdownMenu from "./DropdownMenu";
 import "../css/Navigation.css"
 
-const Navigation = () =>
-    <header>
-        <Link to={routes.HOME}><p>Guesser Game</p></Link>
-        <AuthUserContext.Consumer>
-        { authUser => authUser 
-          ? <DropdownMenu listitems={NavigationAuth()} />
-          : <DropdownMenu listitems={NavigationNonAuth()} />
-        }
-        </AuthUserContext.Consumer>
-    </header>
+class Navigation extends Component {
+    constructor(props){
+        super(props)
+    }
+
+    render(){
+        return(
+            <header>
+                <Link to={routes.HOME}><p>Guesser Game</p></Link>
+                <AuthUserContext.Consumer>
+                { authUser => authUser 
+                ? <DropdownMenu listitems={NavigationAuth()} />
+                : <DropdownMenu listitems={NavigationNonAuth()} />
+                }
+                </AuthUserContext.Consumer>
+            </header>
+        )
+    }
+}
+
 
 const NavigationAuth = () =>
     <ul className="headerList">

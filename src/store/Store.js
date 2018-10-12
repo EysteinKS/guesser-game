@@ -13,5 +13,8 @@ export const Store = new Listenable({
         MediumLength: "",
         HardLength: "",
         createWordCondition: "Ready to submit new word",
+        loggedIn: "false",
+        userDataLoaded: "false",
+        userDataLoadingMessage: "Loading user data..."
     }
 })

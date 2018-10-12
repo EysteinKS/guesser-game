@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from "react-router-dom";
+import { Store } from "./store/Store"
 import './css/App.css';
 
 import Navigation from "./components/Navigation";
@@ -32,7 +33,7 @@ class App extends Component {
           <Route className="full-height" exact path={routes.CREATE} component={() => <Create />} />
           <Route className="full-height" exact path={routes.JOIN} component={() => <Join />} />
           <Route className="full-height" exact path={routes.PLAY} component={() => <Play />} />
-          <Route className="full-height" exact path={routes.PROFILE} component={() => <Profile />} />
+          <Route className="full-height" exact path={routes.PROFILE} component={() => <Profile loaded={Store["userDataLoaded"]} />} />
           <Route className="full-height" exact path={routes.PW_FORGET} component={() => <PasswordForget/>} />
           <Route className="full-height" exact path={routes.SIGN_UP} component={() => <SignUp />} />
           <Route className="full-height" exact path={routes.SIGN_IN} component={() => <SignIn />} />        

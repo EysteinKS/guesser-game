@@ -23,7 +23,7 @@ const withAuthentication = (Component) => {
         }
         
         loadUserData = (authUser) => {
-            new Promise((resolve) => resolve(auth.getUserName()))
+            new Promise((resolve) => resolve(auth.getUserData()))
                 .then(() => this.setState(() => ({ authUser })))
         }
 

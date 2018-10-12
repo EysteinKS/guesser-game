@@ -18,3 +18,9 @@ export const Store = new Listenable({
         userDataLoadingMessage: "Loading user data..."
     }
 })
+
+export const UserStore = new Listenable({
+    initialstate: {
+        
+    }
+})

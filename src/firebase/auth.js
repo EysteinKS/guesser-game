@@ -1,5 +1,5 @@
 import { auth, firestore } from "./firebase"
-import { Store } from "../store/Store"
+import { Store, UserStore } from "../store/Store"
 
 //Sign Up
 export const doCreateUserWithEmailAndPassword = (email, password) =>
@@ -22,23 +22,15 @@ export const doPasswordUpdate = (password) =>
 export const getUser = () =>
   auth.currentUser;
 
-export const getUserData = (uid) => {
-  let user = firestore.collection("Users").doc(uid)
-  user.get()
-}
-
-export const getUserName = () => {
+export const getUserData = () => {
+  console.log("Getting user data")
   let user = firestore.collection("Users").doc(getUser().uid)
   user.get()
     .then((snapshot) => {
-      //CREATE JAVASCRIPT OBJECT
       const data = snapshot.data()
-      const username = data.username
-      //QUERY OBJECT FOR USERNAME
-      console.log("Auth Username = " + username)
-      console.log("User Data Loaded")
-      Store.set({ ["currentUsername"]: username, ["userDataLoaded"]: "true", ["userDataLoadingMessage"]: "User Data Loaded!"})
+      UserStore.set({ ["Username"]: data.username, ["Permission"]: data.permission, ["userDataLoaded"]: "true", })
+      console.log("User data stored")
     })
-    .catch((error) =>
-      console.log("error =" + error))
+    .catch((error) => 
+      console.log("error = ", error))
 }

@@ -1,17 +1,17 @@
 import React, { Component } from "react";
-import { Store } from "../store/Store"
+import { UserStore } from "../store/Store"
 
 class Profile extends Component {
     constructor(props){
         super(props)
-        Store.addListener(this.onChange)
+        UserStore.addListener(this.onChange)
         this.state = {
             dataLoaded: false
         }
     }
 
     componentWillUnmount() {
-        Store.removeListener(this.onChange)
+        UserStore.removeListener(this.onChange)
     }
 
     onChange = () => {
@@ -21,7 +21,7 @@ class Profile extends Component {
     render(){
         return(
             <section>
-                {Store["userDataLoaded"] == "true"
+                {UserStore["userDataLoaded"] == "true"
                 ? <ProfileAuth/>
                 : <ProfileNonAuth/>
                 }
@@ -31,11 +31,13 @@ class Profile extends Component {
 
 }
 
-const ProfileAuth = () =>
-    <p>Current user is {Store["currentUsername"]}</p>
-
+const ProfileAuth = () => 
+    <section>
+        <p>Current user is {UserStore["Username"]}</p>
+        <p>User permission level is {UserStore["Permission"]}</p>
+    </section>
 
 const ProfileNonAuth = () =>
-    <p>{Store["userDataLoadingMessage"]}</p>
+    <p>Loading user data...</p>
 
 export default Profile;

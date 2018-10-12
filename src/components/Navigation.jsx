@@ -3,14 +3,15 @@ import {  Link } from "react-router-dom";
 import * as routes from "../constants/routes";
 import AuthUserContext from "../AuthUserContext";
 import SignOutButton from "../components/SignOut";
+import DropdownMenu from "./DropdownMenu";
 
 const Navigation = () =>
     <header>
         <Link to={routes.HOME}><p>Guesser Game</p></Link>
         <AuthUserContext.Consumer>
         { authUser => authUser 
-          ? <NavigationAuth /> 
-          : <NavigationNonAuth />
+          ? <DropdownMenu listitems={NavigationAuth()} />
+          : <DropdownMenu listitems={NavigationNonAuth()} />
         }
         </AuthUserContext.Consumer>
     </header>

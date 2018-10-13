@@ -25,9 +25,11 @@ export const UserStore = new Listenable({
         userDataLoaded: "",
         isInLobby: "",
         hasActiveSession: "",
+        hadActiveSession: "",
         isHost: "false",
         ActiveSession: "",
-        ActiveSessionKey: ""
+        ActiveSessionKey: "",
+        createdNewLobby: "false"
     }
 })
 

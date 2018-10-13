@@ -27,6 +27,7 @@ class CreateSessionContainer extends Component {
 
 
     doCreateSession = () => {
+        UserStore.set({ ["createdNewLobby"]: "true" })
         session.createSession()
     }
 
@@ -42,15 +43,13 @@ class CreateSessionContainer extends Component {
     }
 
     render(){
-        let activeSessionText;
-        let activeSessionButton;
 
-        if (UserStore["hasActiveSession"] == "true") {
-            activeSessionText = <p>Want to rejoin {UserStore["SessionKey"]}?</p>
-            activeSessionButton = <button onClick={this.returnToSession}>Click Here!</button>
+        let showRejoin
+
+        if (UserStore["hasActiveSession"] = ""){
+            showRejoin = false
         } else {
-            activeSessionText = false;
-            activeSessionButton = false;
+            showRejoin = true
         }
 
         return(
@@ -67,10 +66,17 @@ class CreateSessionContainer extends Component {
                     <input type="submit" value="Join"></input>
                 </form>
                 <p>{SessionStore["SessionJoinState"]}</p>
-                <span>{activeSessionText}{activeSessionButton}</span>
+                {showRejoin
+                ? <div>
+                    <button onClick={this.returnToSession}><p>Click to rejoin {UserStore["SessionKey"]}</p></button>
+                </div>
+                : null}
+                
             </section>
         )
     }
 }
+
+const rejoinSession = click => <div><button onClick={click}>Click Here!</button></div>
 
 export default CreateSessionContainer;

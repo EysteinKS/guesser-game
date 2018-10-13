@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { session } from "../firebase/index"
-import { SessionStore } from "../store/Store"
+import { SessionStore, UserStore } from "../store/Store"
 
 
 class LobbyContainer extends Component {
@@ -17,8 +17,10 @@ class LobbyContainer extends Component {
         this.forceUpdate()
     }
 
-    startSession = () =>
+    startSession = () => {
+        UserStore.set({ ["createdNewLobby"]: "false" })
         session.startSession()
+    }
 
     leaveSession = () => 
         session.leaveSession()

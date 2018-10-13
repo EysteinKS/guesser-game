@@ -36,7 +36,8 @@ export const getUserData = () => {
         ["uid"]: userid,
         ["hasActiveSession"]: data.hasActiveSession,
         ["isInLobby"]: data.isInLobby,
-        ["ActiveSession"]: data.ActiveSession
+        ["ActiveSession"]: data.ActiveSession,
+        ["SessionKey"]: data.ActiveKey
       })
       console.log("User data stored")
       console.log(`hasActiveSession = ${UserStore["hasActiveSession"]} and isInLobby = ${UserStore["isInLobby"]}`)

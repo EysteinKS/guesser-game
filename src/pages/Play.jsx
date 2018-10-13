@@ -35,7 +35,7 @@ class Play extends Component {
         let sessionState;
 
         if (UserStore["isInLobby"] == "true") {
-            if (UserStore["hasActiveSession"] == "true"){
+            if (UserStore["createdNewLobby"] == "false"){
                 sessionState = <ActiveSession/>
             } else {
                 sessionState = <SessionLobby/>
@@ -48,7 +48,6 @@ class Play extends Component {
             <section>
                 <h1>Play</h1>
                 {sessionState}
-                <button onClick={this.doSetDate}>Set Date</button>
             </section>
         )
     }
@@ -77,6 +76,7 @@ class SessionLobby extends Component {
 }
 
 class ActiveSession extends Component {
+
     leaveSession = () =>
         session.leaveSession()
 

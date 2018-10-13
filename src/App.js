@@ -6,8 +6,8 @@ import './css/App.css';
 import Navigation from "./components/Navigation";
 import Home from "./pages/Home";
 import Create from "./pages/Create";
-import Join from "./pages/Join";
 import Play from "./pages/Play";
+import Join from "./pages/Join"
 import Profile from "./pages/Profile";
 import PasswordForget from "./components/PasswordForget";
 import SignUp from "./components/SignUp";
@@ -31,8 +31,8 @@ class App extends Component {
           <Navigation/>
           <Route className="full-height" exact path={routes.HOME} component={() => <Home />} />
           <Route className="full-height" exact path={routes.CREATE} component={() => <Create />} />
-          <Route className="full-height" exact path={routes.JOIN} component={() => <Join />} />
           <Route className="full-height" exact path={routes.PLAY} component={() => <Play />} />
+          <Route className="full-height" exact path={routes.JOIN} component={() => <Join />} />
           <Route className="full-height" exact path={routes.PROFILE} component={() => <Profile loaded={Store["userDataLoaded"]} />} />
           <Route className="full-height" exact path={routes.PW_FORGET} component={() => <PasswordForget/>} />
           <Route className="full-height" exact path={routes.SIGN_UP} component={() => <SignUp />} />

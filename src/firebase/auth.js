@@ -1,5 +1,5 @@
 import { auth, firestore } from "./firebase"
-import { Store, UserStore } from "../store/Store"
+import { UserStore } from "../store/Store"
 
 //Sign Up
 export const doCreateUserWithEmailAndPassword = (email, password) =>
@@ -29,8 +29,16 @@ export const getUserData = () => {
   user.get()
     .then((snapshot) => {
       const data = snapshot.data()
-      UserStore.set({ ["Username"]: data.username, ["Permission"]: data.permission, ["userDataLoaded"]: "true", ["uid"]: userid })
+      UserStore.set({ 
+        ["Username"]: data.username, 
+        ["Permission"]: data.permission, 
+        ["userDataLoaded"]: "true", 
+        ["uid"]: userid,
+        ["hasActiveSession"]: data.hasActiveSession,
+        ["isInLobby"]: data.isInLobby  
+      })
       console.log("User data stored")
+      console.log(`hasActiveSession = ${UserStore["hasActiveSession"]} and isInLobby = ${UserStore["isInLobby"]}`)
     })
     .catch((error) => 
       console.log("error = ", error))

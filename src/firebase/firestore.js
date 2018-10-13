@@ -42,10 +42,6 @@ export const getLengthOfDifficulty = (lang, diff) =>
             }
             Store.set({ ["EasyLength"]: currentDocument.EasyLength, ["MediumLength"]: currentDocument.MediumLength, ["HardLength"]: currentDocument.HardLength })
             
-            let currentEasyLength = Store["EasyLength"]
-            let currentMediumLength = Store["MediumLength"]
-            let currentHardLength = Store["HardLength"]
-            
         })
         .catch((error) =>
         console.log("Error getting document: ", error)
@@ -101,5 +97,9 @@ export const setNewWordInDictionary = ( lang, diff, newWord, newType, newCategor
 export const doCreateUser = (id, u, e) =>
     firestore.collection("Users").doc(id).set({
         username: u,
-        email: e
+        email: e,
+        ActiveSession: "",
+        hasActiveSession: false,
+        isInLobby: false,
+        permission: "User"
     })

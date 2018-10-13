@@ -1,11 +1,11 @@
-import React, {Component} from "react";
+import React, { Component } from "react"
 
 class Join extends Component {
-    render(){
+    render() {
         return(
-            <section>
-                <h1>Join</h1>
-            </section>
+            <div>
+                <p>Join Session</p>
+            </div>
         )
     }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { UserStore } from "../store/Store"
+import { UserStore, SessionStore } from "../store/Store"
 
 class Profile extends Component {
     constructor(props){

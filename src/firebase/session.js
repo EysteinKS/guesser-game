@@ -133,7 +133,8 @@ export const lockSession = () => {
 
 export const joinSession = ( session ) => {
     console.log(`Adding user ${UserStore["Username"]} with uid ${UserStore["uid"]} to session ${session}`)
-    usersRef.doc(UserStore["uid"]).update({     })
+    usersRef.doc(UserStore["uid"]).update({ ActiveSession: session })
+    //Push user to lobby page
 }
 
 export const kickPlayer = () => {

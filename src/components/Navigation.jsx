@@ -31,7 +31,6 @@ const NavigationAuth = () =>
     <ul className="headerList">
         <li className="headerLink"><Link to={routes.PROFILE}>Profile</Link></li>
         <li className="headerLink"><Link to={routes.CREATE}>Create</Link></li>
-        <li className="headerLink"><Link to={routes.JOIN}>Join</Link></li>
         <li className="headerLink"><Link to={routes.PLAY}>Play</Link></li>
         <li className="headerLink"><SignOutButton /></li>
     </ul>

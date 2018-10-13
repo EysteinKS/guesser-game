@@ -18,16 +18,18 @@ export const Store = new Listenable({
 })
 
 export const UserStore = new Listenable({
-    initialstate: {
+    initialState: {
         Username: "",
         Permission: "",
-        userDataLoaded: ""
+        userDataLoaded: "",
+        isInLobby: "",
+        hasActiveSession: ""
     }
 })
 
 export const SessionStore = new Listenable({
-    initialstate: {
+    initialState: {
         sessionID: "",
-        uid: ""
+        uid: "",
     }
 })

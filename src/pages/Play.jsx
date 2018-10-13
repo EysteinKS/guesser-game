@@ -78,9 +78,39 @@ class SessionLobby extends Component {
 }
 
 class ActiveSession extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            didMount: false
+        }
+
+        this.onUnload = this.onUnload.bind(this);
+    }
+
+    onUnload(event) {
+        if (this.state.didMount == false){
+            console.log("componentDidMount")
+            event.returnValue = "Page Loaded"
+            alert("addEventListener")
+        } else if (this.state.didMount == true) {
+            console.log("componentWillUnmount")
+            session.leaveSession()
+            event.returnValue = "Page Unloaded"
+        }
+    }
 
     leaveSession = () =>
         session.leaveSession()
+
+    componentDidMount(){
+        window.addEventListener("beforeunload", this.onUnload)
+        this.setState({ didMount: true })
+    }
+
+    componentWillUnmount(){
+        window.removeEventListener("beforeunload", this.onUnload)
+        console.log("ActiveSession did unmount")
+    }
 
     render(){
         return(

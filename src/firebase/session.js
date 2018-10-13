@@ -63,7 +63,6 @@ export const updateActivePlayers = ( changeType ) => {
     switch(changeType){
         case("add"):
             //Create if statement that sees if player is already in the players subcollection
-            addPlayerToSessionPlayers()
             action = Number(SessionStore["activePlayers"]) + 1
             console.log("Adding activePlayer")
             addPlayerToSessionPlayers()
@@ -222,10 +221,10 @@ export const removeSessionStateListener = () => {
 
 export const leaveSession = () => {
     console.log("Current activePlayers in session is", SessionStore["activePlayers"])
-    usersRef.doc(UserStore["uid"]).update({ hasActiveSession: false, isInLobby: false, ActiveSession: "" })
+    usersRef.doc(UserStore["uid"]).update({ hasActiveSession: false, isInLobby: false, ActiveSession: "", SessionKey: SessionStore["SessionKey"] })
         .then(() => {
             removeSessionStateListener()
-            UserStore.set({ ["hasActiveSession"]: "false", ["isInLobby"]: "false", ["isHost"]: "false" })
+            UserStore.set({ ["hasActiveSession"]: "false", ["isInLobby"]: "false", ["isHost"]: "false", ["SessionKey"]: SessionStore["SessionKey"] })
             console.log("Left Session")
             updateActivePlayers("remove")
         })

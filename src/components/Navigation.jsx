@@ -29,7 +29,8 @@ class Navigation extends Component {
 
 
 const NavigationAuth = () =>
-<div className="navDrop"><ul className="headerList">
+<div className="navDrop">
+<ul className="headerList">      
       <li className="headerLink"><Link className="headerLinkText" to={routes.PROFILE}>Profile</Link></li>
         <li className="headerLink"><Link className="headerLinkText" to={routes.CREATE}>Create</Link></li>
         <li className="headerLink"><Link className="headerLinkText" to={routes.PLAY}>Play</Link></li>

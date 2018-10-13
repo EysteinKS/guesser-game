@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import "../css/DropdownMenu.css";
 
 class DropdownMenu extends Component {
   constructor(props) {
@@ -31,8 +32,8 @@ class DropdownMenu extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.showMenu}>
-          Show menu
+        <button className="showButton" onClick={this.showMenu}>
+          
         </button>
         
         {

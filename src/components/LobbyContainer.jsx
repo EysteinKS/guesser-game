@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { session } from "../firebase/index"
 import { SessionStore } from "../store/Store"
 
+
 class LobbyContainer extends Component {
     constructor(props){
         super(props)
@@ -26,7 +27,7 @@ class LobbyContainer extends Component {
         return(
             <section>
                 <h1>Session Lobby</h1>
-                <h3>Share the key {SessionStore["SessionKey"]} to invite players</h3>
+                <h3>Share the key <span className="sessionKey">{SessionStore["SessionKey"]}</span> to invite players</h3>
                 <p>Current active players is {SessionStore["activePlayers"]}</p>
                 <ul>
                     <li>Player 1 = ...</li>

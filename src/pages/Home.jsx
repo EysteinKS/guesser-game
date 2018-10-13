@@ -12,8 +12,10 @@ class Home extends Component {
 
         return(
             <section>
+            
                 <h1>Home</h1>
-                <WordListContainer className="wordList"/>
+                <WordListContainer/>
+            
             </section>
         )
     }

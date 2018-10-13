@@ -16,16 +16,69 @@ font-size: 150%
     color: black;
     font-size: 250%
 }
-.wordGenerator {
-    font-size: 75%
+.wordGeneratorHeader {
+    font-size: 80%;
+    
+
+}
+.difficultySelecter {
+    width: 60%;
+    height: 40%;
+    margin: 2% 2%;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: #343f68;
+    color: white;
 }
 .languageSelecter{
-
+    width: 60%;
+    height: 70%;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 2% 2%;
+    background-color: #343f68;
+    color: white
 }
 
 .getWordButton {
-    border: none;
+    
     color: white;
-    background-color: #0a7899;
-    padding: 15px 32px;
+    background-color: #f0a202;
+    padding: 3% 1%;
+    width: 35%;
+    height: 20%;
+    margin: 4% 10%;
+    
+    
+}
+
+.mainTable {
+    
+}
+
+  .main {
+    display: grid;
+   
+    justify-items: center;
+    
+    
+   
+}
+
+.wordGenerator {
+    
+    width: 360px;
+    height: 200px;
+    display: block;
+    
+    
+    
+    
+}
+
+.showWord{
+    width: 360px;
+    height: 200px;
+    display: block;
+}
+.lastTable {
+    
 }

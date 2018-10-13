@@ -1,5 +1,5 @@
 header {
-    background-color: #0a7899;
+    background-color: #343f68;
     margin-top: 0px;
     margin-bottom: 5px;
     padding-top: 10px;
@@ -16,19 +16,26 @@ header div {
     margin: 0px;
     padding: 0px;
 }
-button.signOut {
-color: black;
+.headerLink_signOutButton {
 
+
+}
+.signOutButton{
+    
 }
 .headerList {
     align-content: center;
-    background-color: #0a7899;
+    background-color: #273050;
     padding: 0px;
-    margin: 0px;
+    margin: 2px;
+    
     
     
 }
-
+.logoHeader {
+    width: 15%;
+    
+}
 .headerLink {
     text-align: center;
     color: white;
@@ -40,7 +47,14 @@ color: black;
 }
 .headerLinkText {
 color: white;
+
+
 }
 header li:hover {
     background: aqua;
+}
+.navDrop{
+    display: grid;
+    justify-items: center;
+    
 }

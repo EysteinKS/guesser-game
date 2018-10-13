@@ -1,11 +1,12 @@
 import React, { Component } from "react"
 import { session } from "../firebase/index"
-import { SessionStore } from "../store/Store"
+import { SessionStore, UserStore } from "../store/Store"
 
 class CreateSessionContainer extends Component {
     constructor(props){
         super(props)
         SessionStore.addListener(this.onChange)
+        UserStore.addListener(this.onChange)
         this.state = {
             sessionKey: ""
         }
@@ -14,6 +15,7 @@ class CreateSessionContainer extends Component {
 
     componentWillUnmount() {
         SessionStore.removeListener(this.onChange)
+        UserStore.removeListener(this.onChange)
     }
 
     onChange = () => {
@@ -29,11 +31,28 @@ class CreateSessionContainer extends Component {
     }
 
     doJoinSession = ( event ) => {
+
         session.joinSession( this.state.sessionKey )
         event.preventDefault();
     }
 
+    returnToSession = ( event ) => {
+            session.joinSession( UserStore["SessionKey"] )
+            event.preventDefault()
+    }
+
     render(){
+        let activeSessionText;
+        let activeSessionButton;
+
+        if (UserStore["hasActiveSession"] == "true") {
+            activeSessionText = <p>Want to rejoin {UserStore["SessionKey"]}?</p>
+            activeSessionButton = <button onClick={this.returnToSession}>Click Here!</button>
+        } else {
+            activeSessionText = false;
+            activeSessionButton = false;
+        }
+
         return(
             <section>
                 <button onClick={this.doCreateSession}>Create Session</button>
@@ -46,8 +65,9 @@ class CreateSessionContainer extends Component {
                         placeholder="Session Key">
                     </input>
                     <input type="submit" value="Join"></input>
-                    <p>{SessionStore["SessionJoinState"]}</p>
                 </form>
+                <p>{SessionStore["SessionJoinState"]}</p>
+                <span>{activeSessionText}{activeSessionButton}</span>
             </section>
         )
     }

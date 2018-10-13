@@ -10,8 +10,8 @@ class LobbyContainer extends Component {
     startSession = () =>
         session.startSession()
 
-    closeLobby = () => 
-        session.closeLobby()
+    leaveSession = () => 
+        session.leaveSession()
 
     render(){
         return(
@@ -22,7 +22,7 @@ class LobbyContainer extends Component {
                     <li>Player 1 = ...</li>
                     <li>Player 2 = ...</li>
                 </ul>
-                <button onClick={this.closeLobby}>Close Lobby</button>
+                <button onClick={this.leaveSession}>Close Lobby</button>
                 <button>Ready</button>
                 <button onClick={this.startSession}>Start Session</button>
             </section>

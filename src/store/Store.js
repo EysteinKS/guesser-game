@@ -24,6 +24,7 @@ export const UserStore = new Listenable({
         userDataLoaded: "",
         isInLobby: "",
         hasActiveSession: "",
+        isHost: "false",
         ActiveSession: ""
     }
 })
@@ -33,6 +34,7 @@ export const SessionStore = new Listenable({
         sessionID: "",
         uid: "",
         returnKey: "",
-        SessionKey: ""
+        SessionKey: "",
+        activePlayers: ""
     }
 })

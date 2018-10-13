@@ -26,11 +26,13 @@ class Play extends Component {
         this.forceUpdate()
     }
 
+    doSetDate = () => {
+        session.getTimeStamp()
+    }
+
     render(){
 
         let sessionState;
-        console.log("hasActiveSession =", UserStore["hasActiveSession"])
-        console.log("isInLobby =", UserStore["isInLobby"])
 
         if (UserStore["isInLobby"] == "true") {
             if (UserStore["hasActiveSession"] == "true"){
@@ -46,6 +48,7 @@ class Play extends Component {
             <section>
                 <h1>Play</h1>
                 {sessionState}
+                <button onClick={this.doSetDate}>Set Date</button>
             </section>
         )
     }

@@ -5,11 +5,100 @@ const sessionRef = firestore.collection("Sessions");
 const liveSessionsRef = sessionRef.doc("SessionData").collection("LiveSessions");
 const usersRef = firestore.collection("Users");
 
+//Session Time
+
+const addZero = time => {
+    if (time < 10) {
+        time = "0" + time;
+        return time;
+    } else {
+        return time;
+    }
+};
+
+export const getTimeStamp = () => {
+    let thisDate = new Date()
+    console.log(thisDate)
+    let dateObj = {
+        currentYear: thisDate.getFullYear(),
+        currentMonth: addZero(thisDate.getMonth() + 1),
+        currentDay: addZero(thisDate.getDate()),
+        currentHour: addZero(thisDate.getHours()),
+        currentMinute: addZero(thisDate.getMinutes()),
+        currentSeconds: addZero(thisDate.getSeconds()),
+    }
+    console.log(`Current Time is ${dateObj.currentDay}/${dateObj.currentMonth}/${dateObj.currentYear} ${dateObj.currentHour}:${dateObj.currentMinute}:${dateObj.currentSeconds}`)
+    SessionStore.set({["currentTime"]: `${dateObj.currentDay}/${dateObj.currentMonth}/${dateObj.currentYear} ${dateObj.currentHour}:${dateObj.currentMinute}:${dateObj.currentSeconds}` })
+}
+
+//Active Sessions and Players
+
+export const changeActiveSessions = ( changeType ) => {
+    sessionRef.doc("SessionData").get()
+        .then((docRef) => {
+            let currentActiveSessions = docRef.data().activeSessions
+            console.log("Changing activeSessions, current value is", currentActiveSessions)
+
+            switch(changeType){
+                case("add"):
+                    sessionRef.doc("SessionData").update({ activeSessions: currentActiveSessions + 1 })
+                    currentActiveSessions = docRef.data().activeSessions
+                    console.log("Active Session added to SessionData. Current activeSessions:", currentActiveSessions + 1)
+                    break;
+                case("remove"):
+                    currentActiveSessions = docRef.data().activeSessions
+                    sessionRef.doc("SessionData").update({ activeSessions: currentActiveSessions - 1 })
+                    console.log("Active Session removed to SessionData. Current activeSessions:", currentActiveSessions - 1)
+                    break;
+                default:
+                    console.log("changeType missing, Active Sessions is unchanged")
+                    break;
+            }
+        })
+        .catch((error) => console.log(error))
+}
+
+export const updateActivePlayers = ( changeType ) => {
+    let action;
+    switch(changeType){
+        case("add"):
+            action = Number(SessionStore["activePlayers"]) + 1
+            console.log("Adding activePlayer")
+            break;
+        case("remove"):
+            console.log("Removing activePlayer")
+            action = Number(SessionStore["activePlayers"]) - 1
+            break;
+        default:
+            console.log("switch(changeType) input is empty, running default")
+            break;
+    }
+    console.log("Changing active players in", UserStore["ActiveSession"] + " to", action)
+    liveSessionsRef.doc(UserStore["ActiveSession"]).update({ activePlayers: action })
+        .then(() => {
+            SessionStore.set({ activePlayers: action })
+            console.log("Updated current active players in session to", SessionStore["activePlayers"])
+            if (SessionStore["activePlayers"] < 1) {
+                closeLobby()
+            }
+            if (UserStore["isInLobby"] == "false"){
+                UserStore.set({ ["ActiveSession"]: "" })
+            }
+        })
+        .catch((error) => console.log(error))
+}
+
+export const kickPlayer = () => {
+
+}
+
 //Creation
 
 export const createSession = () => {
-    let sessionHost = { host: UserStore["Username"], joinedPlayers: 1, openSession: true, }
+    let sessionHost = { host: UserStore["Username"], activePlayers: 1, openSession: true, }
+    UserStore.set({ isHost: "true" })
     console.log(`Creating session with ${UserStore["Username"]} as host`)
+    getTimeStamp()
     liveSessionsRef.add(sessionHost)
         .then((docRef) => {
             SessionStore.set({ ["sessionID"]: docRef.id })
@@ -17,11 +106,123 @@ export const createSession = () => {
             setKey()
             createReferenceKey()
             setRules()
-            docRef.update({ sessionStarted: false })
+            docRef.update({ sessionStarted: false, lobbyCreated: SessionStore["currentTime"] })
             joinSession(SessionStore["sessionID"])
+            changeActiveSessions("add")
             //Send host to lobby page
         })
         .catch((error) => console.log(error))
+}
+
+
+export const setRules = () => {
+
+}
+
+export const changeRule = ( ruleKey, newRule ) => {
+
+}
+
+export const lockSession = () => {
+
+}
+
+export const joinSession = ( session ) => {
+    console.log(`Adding user ${UserStore["Username"]} with uid ${UserStore["uid"]} to session ${session}`)
+    if (UserStore["isHost"] == "false"){
+        translateKeyToSessionID(session)
+        joinSessionNonHost()
+    } else {
+        SessionStore.set({["activePlayers"]: "0"})
+        UserStore.set({ ["ActiveSession"]: session })
+        joinSessionHost()
+    }
+    //Push user to lobby page
+}
+
+export const joinSessionHost = () => {
+    usersRef.doc(UserStore["uid"]).update({ ActiveSession: UserStore["ActiveSession"] })
+        .then(() => {
+            usersRef.doc(UserStore["uid"]).update({ isInLobby: true })
+            addSessionStateListener()
+            updateActivePlayers("add")
+            UserStore.set({ ["isInLobby"]: "true" })
+        })
+        .catch((error) => console.log(error))
+    console.log("Active session in store at joinSession is", UserStore["ActiveSession"])
+
+}
+
+export const joinSessionNonHost = () => {
+    usersRef.doc(UserStore["uid"]).update({ ActiveSession: UserStore["ActiveSession"] })
+        .then(() => {
+            usersRef.doc(UserStore["uid"]).update({ isInLobby: true })
+            addSessionStateListener()
+            UserStore.set({ ["isInLobby"]: "true" })
+        })
+        .catch((error) => console.log(error))
+    console.log("Active session in store at joinSession is", UserStore["ActiveSession"])
+
+}
+
+export const startSession = () => {
+    console.log(`Starting session with SessionID ${SessionStore["sessionID"]}`)
+    liveSessionsRef.doc(SessionStore["sessionID"]).update({ sessionStarted: true })
+        .then(() => {
+            usersRef.doc(UserStore["uid"]).update({ hasActiveSession: true })
+            UserStore.set({ ["hasActiveSession"]: "true" })
+            console.log("Current players in lobby is", SessionStore["activePlayers"])
+        })
+        .catch((error) => console.log(error))
+}
+
+export const addSessionStateListener = () => {
+    let hasUpdatedActivePlayers = false
+    liveSessionsRef.doc(UserStore["ActiveSession"])
+        .onSnapshot((docRef) => {
+            if (UserStore["isInLobby"] == "true"){
+                SessionStore.set({["activePlayers"]: docRef.data().activePlayers})
+                console.log("SessionStateListener updated, activePlayers is", docRef.data().activePlayers)
+                
+                if(UserStore["isHost"] == "false" && hasUpdatedActivePlayers == false){
+                    updateActivePlayers("add")
+                    hasUpdatedActivePlayers = true
+                }
+
+            } else {
+                console.log("Player not in lobby, removing listener...")
+            }
+        })
+}
+
+export const removeSessionStateListener = () => {
+    console.log("Removing SessionStateListener")
+    liveSessionsRef.doc(UserStore["ActiveSession"])
+        .onSnapshot(() => {})
+}
+
+export const leaveSession = () => {
+    console.log("Current activePlayers in session is", SessionStore["activePlayers"])
+    usersRef.doc(UserStore["uid"]).update({ hasActiveSession: false, isInLobby: false, ActiveSession: "" })
+        .then(() => {
+            removeSessionStateListener()
+            UserStore.set({ ["hasActiveSession"]: "false", ["isInLobby"]: "false", ["isHost"]: "false" })
+            console.log("Left Session")
+            updateActivePlayers("remove")
+        })
+        .catch((error) => console.log("Unable to leave session, error", error))
+}
+
+
+export const closeLobby = () => {
+    liveSessionsRef.doc(SessionStore["sessionID"]).delete()
+        .then(() => {
+            removeReferenceKey()
+            sessionRef.doc("SessionData").collection("SessionKeyReference").doc(SessionStore["SessionKey"]).delete()
+            changeActiveSessions("remove")
+            console.log("Lobby closed")
+        })
+        .catch((error) => console.log("Error closing lobby", error))
 }
 
 const keyGeneratorEnum = {
@@ -35,6 +236,8 @@ const keyGeneratorEnum = {
 }
 Object.freeze(keyGeneratorEnum)
 
+//KEYS
+
 //Used to turn number into key from keyGeneratorEnum
 const getKeyByValue = (object, value) => {
     return Object.keys(object).find(key => object[key] === value);
@@ -42,17 +245,13 @@ const getKeyByValue = (object, value) => {
 
 //Calculates a new enum from number
 const calculateEnum = (stringEnum) => {
-    console.log("Current stringEnum is", stringEnum)
     let returnKey;
 
     if (stringEnum > 62) {
         stringEnum = stringEnum - 62
-        console.log("stringEnum is greater than 62, recursive function activated")
         calculateEnum(stringEnum)
     } else {
-        console.log("Returning stringEnum of", stringEnum)
         returnKey = getKeyByValue(keyGeneratorEnum, stringEnum)
-        console.log("The returned key is", returnKey)
         SessionStore.set({ ["returnKey"]: returnKey })
     }
 }
@@ -63,15 +262,11 @@ export const generateKey = session => {
     let sessionString = session.toString()
     let sessionKey = "";
 
-    console.log("SessionID is ", sessionString)
-
     let firstSubString = sessionString.substring(0, 4)
     let secondSubString = sessionString.substring(4, 8)
     let thirdSubString = sessionString.substring(8, 12)
     let fourthSubString = sessionString.substring(12, 16)
     let fifthSubString = sessionString.substring(16)
-
-    console.log(`First string is ${firstSubString}, second is ${secondSubString}, third is ${thirdSubString}, fourth is ${fourthSubString} and fifth is ${fifthSubString}`)
 
     let preCalcObject = {
         firstSymbol: firstSubString,
@@ -95,16 +290,13 @@ export const generateKey = session => {
         let currentSymbolCollection = preCalcArray[i]
         let symbolCollection = preCalcObject[currentSymbolCollection]
 
-        console.log(`Current symbol collection is ${currentSymbolCollection}`)
 
         for ( let j = 0; j < 4; j++) {
             let symbolValue = keyGeneratorEnum[symbolCollection.charAt(j)]
             currentCharValues.push(symbolValue)
-            console.log(`${symbolCollection.charAt(j)} has a value of ${symbolValue}`)
         }
 
         postCalcObject[currentSymbolCollection] = currentCharValues.reduce((total, amount) => total + amount)
-        console.log(`Total value of ${preCalcArray[i]} is ${postCalcObject[currentSymbolCollection]}`)
         
         let keyToSymbol = calculateEnum(postCalcObject[currentSymbolCollection])
         keyToSymbol = SessionStore["returnKey"]
@@ -117,78 +309,35 @@ export const generateKey = session => {
 //Sets the key in session database, and stores it so people can join the session
 export const setKey = () => {
     console.log(`Saving key as ${SessionStore["SessionKey"]} to sessionID ${SessionStore["sessionID"]}`)
-    liveSessionsRef.doc(SessionStore["sessionID"]).update({ sessionID: SessionStore["SessionKey"] })
+    liveSessionsRef.doc(SessionStore["sessionID"]).update({ sessionKey: SessionStore["SessionKey"] })
         .then(() => console.log("Key saved in session database"))
         .catch((error) => console.log(error))
 }
 
 export const createReferenceKey = () => {
-    console.log(SessionStore["returnKey"])
+    console.log("Creating reference to key", SessionStore["SessionKey"])
     sessionRef.doc("SessionData").collection("SessionKeyReference").doc(SessionStore["SessionKey"]).set({ SessionID: SessionStore["sessionID"] })
         .then(() => console.log("Session reference created"))
         .catch((error) => console.log(error))
 }
 
-export const setRules = () => {
-
-}
-
-export const changeRule = ( ruleKey, newRule ) => {
-
-}
-
-export const lockSession = () => {
-
-}
-
-export const joinSession = ( session ) => {
-    console.log(`Adding user ${UserStore["Username"]} with uid ${UserStore["uid"]} to session ${session}`)
-    usersRef.doc(UserStore["uid"]).update({ ActiveSession: session })
-        .then(() => {
-            usersRef.doc(UserStore["uid"]).update({ isInLobby: true })
-            UserStore.set({ ["isInLobby"]: "true" })
-        })
+export const removeReferenceKey = () => {
+    sessionRef.doc("SessionData").collection("SessionKeyReference").doc(SessionStore["SessionKey"]).delete()
+        .then(() => console.log("Session reference deleted"))
         .catch((error) => console.log(error))
-    //Push user to lobby page
 }
 
-export const kickPlayer = () => {
-
-}
-
-export const startSession = () => {
-    console.log(`Starting session with SessionID ${SessionStore["sessionID"]}`)
-    liveSessionsRef.doc(SessionStore["sessionID"]).update({ sessionStarted: true })
-        .then(() => {
-            usersRef.doc(UserStore["uid"]).update({ hasActiveSession: true })
-            UserStore.set({ ["hasActiveSession"]: "true" })
+export const translateKeyToSessionID = ( sessionKey ) => {
+    sessionRef.doc("SessionData").collection("SessionKeyReference").doc(sessionKey).get()
+        .then((docRef) => {
+            UserStore.set({ ["ActiveSession"]: docRef.data().SessionID })
+            console.log("Player isn't host, translated SessionKey to SessionID")
+            console.log("ActiveSession in UserStore is ", UserStore["ActiveSession"])
+            joinSessionNonHost()
         })
         .catch((error) => console.log(error))
 }
 
-export const sessionStateListener = () => {
-
-}
-
-export const leaveSession = () => {
-    usersRef.doc(UserStore["uid"]).update({ hasActiveSession: false, isInLobby: false, ActiveSession: "" })
-        .then(() => {
-            UserStore.set({ ["hasActiveSession"]: "false", ["isInLobby"]: "false" })
-            console.log("Left Session")
-        })
-        .catch((error) => console.log("Unable to leave session, error", error))
-}
-
-
-export const closeLobby = () => {
-    leaveSession()
-    liveSessionsRef.doc(SessionStore["sessionID"]).delete()
-        .then(() => {
-            sessionRef.doc("SessionData").collection("SessionKeyReference").doc(SessionStore["SessionKey"]).delete()
-            console.log("Lobby closed")
-        })
-        .catch((error) => console.log("Error closing lobby", error))
-}
 
 //Active session
 

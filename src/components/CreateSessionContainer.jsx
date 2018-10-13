@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { session } from "../firebase/index"
+import { UserStore } from "../store/Store"
 
 class CreateSessionContainer extends Component {
     constructor(props){
@@ -8,6 +9,10 @@ class CreateSessionContainer extends Component {
         this.state = {
             sessionKey: ""
         }
+
+    }
+
+    componentDidMount() {
 
     }
 

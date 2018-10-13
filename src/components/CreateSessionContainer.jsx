@@ -19,8 +19,9 @@ class CreateSessionContainer extends Component {
         session.createSession()
     }
 
-    doJoinSession = ( sessionkey ) => {
-        session.joinSession( sessionkey )
+    doJoinSession = ( event ) => {
+        session.joinSession( this.state.sessionKey )
+        event.preventDefault();
     }
 
     render(){

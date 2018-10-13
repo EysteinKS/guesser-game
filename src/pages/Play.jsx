@@ -58,9 +58,11 @@ class JoinSession extends Component {
     render(){
         return(
             <div>
-                <h1>Join a session</h1>
-                <h3>Or create session</h3>
+                
+                
+                <h1>Create session</h1>
                 <CreateSessionContainer/>
+                
             </div>
         )
     }
@@ -82,13 +84,13 @@ class ActiveSession extends Component {
 
     render(){
         return(
-            <div>
-                <h1>Active Session</h1>
-                <SessionContainer/>
-                <TimerContainer/>
-                <MembersContainer/>
-                <WordListContainer/>
-                <button onClick={this.leaveSession}>Leave Session</button>
+            <div className="activeSessionGrid">
+                <div className="activeSessionGridPeace"><h1>Active Session</h1></div>
+                <div className="activeSessionGridPeace"> <TimerContainer/></div>
+                <div className="activeSessionGridPeace"> <MembersContainer/></div>
+                <div className="activeSessionGridPeace"> <WordListContainer/></div>
+                <button className="createSessionButton" onClick={this.leaveSession}>Leave Session</button>
+                <div className="activeSessionGridPeace"> <SessionContainer/></div>
             </div>
         )
     }

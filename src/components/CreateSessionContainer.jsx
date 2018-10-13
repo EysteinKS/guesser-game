@@ -35,21 +35,30 @@ class CreateSessionContainer extends Component {
 
     render(){
         return(
-            <section>
-                <button onClick={this.doCreateSession}>Create Session</button>
-                <form onSubmit={this.doJoinSession}>
-                    <input 
+           <div className="createJoinSessionGrid">
+           <section>
+           <div className="createSession">
+                <button className="createSessionButton" onClick={this.doCreateSession}>Create Session</button></div>
+               
+                <div className="joinSession">
+                <form onSubmit={this.doJoinSession} autocomplete="off">
+                <h1>Join a session</h1>
+                <p>{SessionStore["SessionJoinState"]}</p>
+                
+                    <input className="sessionKeyInput" 
                         name="sessionKey"
                         type="text"
                         value={this.state.sessionKey}
                         onChange={this.handleChange}
-                        placeholder="Session Key">
+                        placeholder="CODE">
                     </input>
-                    <input type="submit" value="Join"></input>
-                    <p>{SessionStore["SessionJoinState"]}</p>
+                    <div className="joinSessionButton"><input className="createSessionButton" type="submit" value="Join"></input></div>
+                    
+                    
                 </form>
+                </div>
             </section>
-        )
+            </div>   )
     }
 }
 

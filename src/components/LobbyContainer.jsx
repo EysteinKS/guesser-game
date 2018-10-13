@@ -30,14 +30,14 @@ class LobbyContainer extends Component {
             <section>
                 <h1>Session Lobby</h1>
                 <h3>Share the key <span className="sessionKey">{SessionStore["SessionKey"]}</span> to invite players</h3>
-                <p>Current active players is {SessionStore["activePlayers"]}</p>
+                <p className="sessionPlayer">Current active players is {SessionStore["activePlayers"]}</p>
                 <ul>
                     <li>Player 1 = ...</li>
                     <li>Player 2 = ...</li>
                 </ul>
-                <button onClick={this.leaveSession}>Close Lobby</button>
-                <button>Ready</button>
-                <button onClick={this.startSession}>Start Session</button>
+                <button className="createSessionButton" onClick={this.leaveSession}>Close Lobby</button>
+                <button className="createSessionButton">Ready</button>
+                <button className="createSessionButton" onClick={this.startSession}>Start Session</button>
             </section>
         )
     }

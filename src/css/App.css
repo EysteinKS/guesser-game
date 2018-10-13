@@ -41,4 +41,57 @@ li {
 .sessionKey{
   color: red;
   font-size: 200%;
+  
+}
+.sessionPlayer {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 140%;
+}
+.createSessionButton{
+  border: none;
+  color: white;
+  background-color: #282c34;
+  margin: 15px;
+  padding: 10px 40px;
+  
+  font-size: 160%;
+  border-radius: 25px;
+
+} 
+@font-face{
+  font-family: "MainFont";
+  src: url(GrenadierNF.ttf)
+}
+.createSession{
+
+}
+.createJoinSessionGrid{
+  display: grid;
+  
+
+}
+.joinSession{
+display: grid;
+margin-top: 5%;
+}
+
+.createSessionButton{
+  border:none;
+}
+.sessionKeyInput{
+  height: 50px;
+  width: 140px;
+  font-size: 40px;
+  text-align: center;
+}
+.activeSessionGrid{
+  display: grid;
+  border: 3px black;
+  grid-template-columns: auto auto;
+
+
+}
+.activeSessionGridPeace{
+display: grid;
+
 }

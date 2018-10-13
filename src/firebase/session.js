@@ -131,8 +131,6 @@ export const joinSession = ( session ) => {
     console.log(`Adding user ${UserStore["Username"]} with uid ${UserStore["uid"]} to session ${session}`)
     if (UserStore["isHost"] == "false"){
         translateKeyToSessionID(session)
-        SessionStore.set({ ["SessionKey"]: session })
-        joinSessionNonHost()
     } else {
         SessionStore.set({["activePlayers"]: "0"})
         UserStore.set({ ["ActiveSession"]: session })
@@ -332,11 +330,15 @@ export const translateKeyToSessionID = ( sessionKey ) => {
     sessionRef.doc("SessionData").collection("SessionKeyReference").doc(sessionKey).get()
         .then((docRef) => {
             UserStore.set({ ["ActiveSession"]: docRef.data().SessionID })
+            SessionStore.set({ ["SessionKey"]: sessionKey })
             console.log("Player isn't host, translated SessionKey to SessionID")
             console.log("ActiveSession in UserStore is ", UserStore["ActiveSession"])
             joinSessionNonHost()
         })
-        .catch((error) => console.log(error))
+        .catch((error) => {
+            console.log("SessionKey doesn't exist")
+            SessionStore.set({["SessionJoinState"]: "Session doesn't exist"})
+        })
 }
 
 

@@ -1,19 +1,23 @@
 import React, { Component } from "react"
 import { session } from "../firebase/index"
-import { UserStore } from "../store/Store"
+import { SessionStore } from "../store/Store"
 
 class CreateSessionContainer extends Component {
     constructor(props){
         super(props)
-
+        SessionStore.addListener(this.onChange)
         this.state = {
             sessionKey: ""
         }
 
     }
 
-    componentDidMount() {
+    componentWillUnmount() {
+        SessionStore.removeListener(this.onChange)
+    }
 
+    onChange = () => {
+        this.forceUpdate()
     }
 
     handleChange = (event) =>
@@ -42,6 +46,7 @@ class CreateSessionContainer extends Component {
                         placeholder="Session Key">
                     </input>
                     <input type="submit" value="Join"></input>
+                    <p>{SessionStore["SessionJoinState"]}</p>
                 </form>
             </section>
         )

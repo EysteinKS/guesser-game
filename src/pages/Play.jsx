@@ -4,7 +4,9 @@ import TimerContainer from "../components/TimerContainer";
 import WordListContainer from "../components/WordListContainer";
 import SessionContainer from "../components/SessionContainer";
 import CreateSessionContainer from "../components/CreateSessionContainer";
+import LobbyContainer from "../components/LobbyContainer"
 import { UserStore, SessionStore } from "../store/Store"
+import { session } from "../firebase/index"
 
 class Play extends Component {
     constructor(props){
@@ -30,8 +32,8 @@ class Play extends Component {
         console.log("hasActiveSession =", UserStore["hasActiveSession"])
         console.log("isInLobby =", UserStore["isInLobby"])
 
-        if (UserStore["isInLobby"]) {
-            if (UserStore["hasActiveSession"]){
+        if (UserStore["isInLobby"] == "true") {
+            if (UserStore["hasActiveSession"] == "true"){
                 sessionState = <ActiveSession/>
             } else {
                 sessionState = <SessionLobby/>
@@ -64,14 +66,7 @@ class JoinSession extends Component {
 class SessionLobby extends Component {
     render(){
         return(
-            <div>
-                <h1>Session Lobby</h1>
-                <ul>
-                    <li>Player 1 = ...</li>
-                    <li>Player 2 = ...</li>
-                </ul>
-                <button>Ready</button>
-            </div>
+            <LobbyContainer/>
         )
     }
 
@@ -79,6 +74,9 @@ class SessionLobby extends Component {
 }
 
 class ActiveSession extends Component {
+    leaveSession = () =>
+        session.leaveSession()
+
     render(){
         return(
             <div>
@@ -87,6 +85,7 @@ class ActiveSession extends Component {
                 <TimerContainer/>
                 <MembersContainer/>
                 <WordListContainer/>
+                <button onClick={this.leaveSession}>Leave Session</button>
             </div>
         )
     }

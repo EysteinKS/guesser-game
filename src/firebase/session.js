@@ -16,6 +16,8 @@ export const createSession = () => {
             generateKey(docRef.id)
             setKey()
             createReferenceKey()
+            setRules()
+            docRef.update({ sessionStarted: false })
             joinSession(SessionStore["sessionID"])
             //Send host to lobby page
         })
@@ -142,6 +144,11 @@ export const lockSession = () => {
 export const joinSession = ( session ) => {
     console.log(`Adding user ${UserStore["Username"]} with uid ${UserStore["uid"]} to session ${session}`)
     usersRef.doc(UserStore["uid"]).update({ ActiveSession: session })
+        .then(() => {
+            usersRef.doc(UserStore["uid"]).update({ isInLobby: true })
+            UserStore.set({ ["isInLobby"]: "true" })
+        })
+        .catch((error) => console.log(error))
     //Push user to lobby page
 }
 
@@ -150,7 +157,26 @@ export const kickPlayer = () => {
 }
 
 export const startSession = () => {
+    console.log(`Starting session with SessionID ${SessionStore["sessionID"]}`)
+    liveSessionsRef.doc(SessionStore["sessionID"]).update({ sessionStarted: true })
+        .then(() => {
+            usersRef.doc(UserStore["uid"]).update({ hasActiveSession: true })
+            UserStore.set({ ["hasActiveSession"]: "true" })
+        })
+        .catch((error) => console.log(error))
+}
 
+export const sessionStateListener = () => {
+
+}
+
+export const leaveSession = () => {
+    usersRef.doc(UserStore["uid"]).update({ hasActiveSession: false, isInLobby: false, ActiveSession: "" })
+        .then(() => {
+            UserStore.set({ ["hasActiveSession"]: "false", ["isInLobby"]: "false" })
+            console.log("Left Session")
+        })
+        .catch((error) => console.log("Unable to leave session, error", error))
 }
 
 //Active session

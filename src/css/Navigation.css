@@ -1,6 +1,7 @@
 header {
-    background-color: blue;
+    background-color: #0000ff;
     margin-top: 0px;
+    margin-bottom: 5px;
     padding-top: 10px;
     padding-bottom: 10px;
 }
@@ -26,6 +27,6 @@ header div {
     background-clip: padding-box;
 }
 
-li:hover {
+header li:hover {
     background: aqua;
 }

@@ -23,7 +23,8 @@ export const UserStore = new Listenable({
         Permission: "",
         userDataLoaded: "",
         isInLobby: "",
-        hasActiveSession: ""
+        hasActiveSession: "",
+        ActiveSession: ""
     }
 })
 

@@ -8,7 +8,7 @@ const usersRef = firestore.collection("Users");
 //Creation
 
 export const createSession = () => {
-    let sessionHost = { host: UserStore["Username"] }
+    let sessionHost = { host: UserStore["Username"], joinedPlayers: 1, openSession: true, }
     console.log(`Creating session with ${UserStore["Username"]} as host`)
     liveSessionsRef.add(sessionHost)
         .then((docRef) => {
@@ -179,6 +179,17 @@ export const leaveSession = () => {
         .catch((error) => console.log("Unable to leave session, error", error))
 }
 
+
+export const closeLobby = () => {
+    leaveSession()
+    liveSessionsRef.doc(SessionStore["sessionID"]).delete()
+        .then(() => {
+            sessionRef.doc("SessionData").collection("SessionKeyReference").doc(SessionStore["SessionKey"]).delete()
+            console.log("Lobby closed")
+        })
+        .catch((error) => console.log("Error closing lobby", error))
+}
+
 //Active session
 
 export const startRound = () => {
@@ -208,7 +219,7 @@ export const endRound = () => {
 //Finishing session
 
 export const endSession = () => {
-
+    //Delete session key reference
 }
 
 export const showResults = () => {

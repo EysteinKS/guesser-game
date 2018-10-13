@@ -26,14 +26,10 @@ class WordListContainer extends Component {
 
     randomWord = () => {
         let currentWord = Store["wordDoc"]
-        console.log(currentWord + " is currentWord")
         let newWord = random(1, Store[`${this.state.chooseDifficulty}Length`])
-        console.log(newWord + " is newWord")
         if (newWord == currentWord) {
-            console.log("newWord equals currentWord, creating new word")
             newWord = this.randomWord()
         } else {
-            console.log(newWord + " is being returned as newWord")
             Store.set({ ["wordDoc"]: newWord})
             firestore.getWordByDifficultyAndLanguage(this.state.chooseLanguage, this.state.chooseDifficulty, `Word${Store["wordDoc"]}`);
         }
@@ -41,11 +37,9 @@ class WordListContainer extends Component {
     }
 
     onClick = () => {
-        console.log("Button Clicked")
         if (this.state.loadedWord == false) {
             this.setState({ loadedWord: !this.state.loadedWord})
         }
-        console.log("Setting newWord")
         this.randomWord()
     }
 

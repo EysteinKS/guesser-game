@@ -63,8 +63,8 @@ class CreateSessionContainer extends Component {
                 </div>
 
                 <div className="joinSession">
-                <p className="readyToJoinText">{SessionStore["SessionJoinState"]}</p>
-                <form onSubmit={this.doJoinSession}>
+                
+                <form onSubmit={this.doJoinSession} autocomplete="off" >
                     <input className="sessionKeyInput"
                         name="sessionKey"
                         type="text"
@@ -79,7 +79,7 @@ class CreateSessionContainer extends Component {
                 </div>
 
                 
-                
+                <p className="readyToJoinText">{SessionStore["SessionJoinState"]}</p>
                 {showRejoin
                 ? <div>
                     <button className="createSessionButtonSquere" onClick={this.returnToSession}><p>Click to rejoin {UserStore["SessionKey"]}</p></button>

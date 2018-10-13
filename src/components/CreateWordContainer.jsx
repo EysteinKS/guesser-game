@@ -50,34 +50,34 @@ class CreateWordContainer extends Component {
             <section>
                 <h3>Create New Word</h3>
                 <form onSubmit={this.newWord}>
-                    <select name="newDifficulty" value={this.state.newDifficulty} onChange={this.handleChange}>
+                    <select className="difficultySelect" name="newDifficulty" value={this.state.newDifficulty} onChange={this.handleChange}>
                         <option value="Easy">Easy</option>
                         <option value="Medium">Medium</option>
                         <option value="Hard">Hard</option>
                     </select>
-                    <select name="newLanguage" value={this.state.newLanguage} onChange={this.handleChange}>
+                    <select className="languageSelect" name="newLanguage" value={this.state.newLanguage} onChange={this.handleChange}>
                         <option value="English">English</option>
                         <option value="Norwegian">Norwegian</option>
                     </select>
-                    <input
+                    <input className="wordInput"
                         name="newWord"
                         type="text"
                         value={this.state.newWord}
                         onChange={this.handleChange}
                         placeholder="New Word">
                     </input>
-                    <select name="newType" value={this.state.newType} onChange={this.handleChange}>
+                    <select className="typeSelect" name="newType" value={this.state.newType} onChange={this.handleChange}>
                         <option value="Noun">Noun</option>
                         <option value="Verb">Verb</option>
                         <option value="Adjective">Adjective</option>
                     </select>
-                    <select name="newCategory" value={this.state.newCategory} onChange={this.handleChange}>
+                    <select className="categorySelect" name="newCategory" value={this.state.newCategory} onChange={this.handleChange}>
                         <option value="Plant">Plant</option>
                         <option value="Animal">Animal</option>
                         <option value="Mineral">Mineral</option>
                         <option value="Abstract">Abstract</option>
                     </select>
-                    <input type="submit" value="Submit"></input>
+                    <input className="submitButton" type="submit" value="Submit"></input>
                 </form>
                 <h3>{Store["createWordCondition"]}</h3>
             </section>

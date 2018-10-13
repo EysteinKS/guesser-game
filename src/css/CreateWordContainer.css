@@ -9,7 +9,45 @@ h2 {
     font-family: sans-serif;
 }
 
-.submit{
-    
+
+.difficultySelect {
+margin: 10px;
+font-size: 120%;
+color:white;
+background-color: #343f68;
 }
 
+.languageSelect{
+    margin: 10px;
+    font-size: 120%;
+    color:white;
+    background-color: #343f68;
+}
+.categorySelect {
+    margin: 10px;
+    font-size: 120%;
+    color:white;
+    background-color: #343f68;
+}
+
+.typeSelect {
+    margin: 10px;
+    font-size: 120%;
+    color:white;
+    background-color: #343f68;
+}
+
+.submitButton {
+    margin: 10px;
+    font-size: 120%;
+    text-anchor:white;
+    background-color: #343f68;
+}
+.wordInput {
+    font-size: 120%;
+    color:white;
+    background-color: #343f68;
+}
+::placeholder {
+    color: white;
+}

@@ -4,6 +4,7 @@ import { session } from "../firebase/index"
 import "../css/home.css"
 import AuthUserContext from "../AuthUserContext";
 import {SignInForm} from "../components/SignIn"
+import {SignUpLink} from "../components/SignUp.jsx"
 
 const Home = () =>
   <div>
@@ -45,6 +46,7 @@ class HomeUnAuth extends Component {
         return(
             <section>
             <SignInForm/>
+            <SignUpLink/>
                 
             
             </section>

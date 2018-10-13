@@ -1,0 +1,31 @@
+.wordOutPut {
+color: #D95D39;
+font-size: 400%
+}
+.wordOutPutType {
+    color: #f18805;
+font-size: 150%
+}
+
+.wordOutPutCategory {
+    color: #f18805;
+    font-size: 250%
+}
+
+.currentWordIs {
+    color: black;
+    font-size: 250%
+}
+.wordGenerator {
+    font-size: 75%
+}
+.languageSelecter{
+
+}
+
+.getWordButton {
+    border: none;
+    color: white;
+    background-color: #0a7899;
+    padding: 15px 32px;
+}

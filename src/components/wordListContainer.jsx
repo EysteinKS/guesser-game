@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { firestore } from "../firebase"
 import { Store } from "../store/Store"
 import random from "lodash.random"
+import "../css/WordListContainer.css";
 
 
 class WordListContainer extends Component {
@@ -54,9 +55,9 @@ class WordListContainer extends Component {
 
         return(
             <section>
-                <h3>Word Generator</h3>
+                <h3 className="wordGenerator">Word Generator</h3>
                 <form>
-                    <select name="chooseLanguage" value={this.state.chooseLanguage} onChange={this.handleChange}>
+                    <select className="languageSelecter" name="chooseLanguage" value={this.state.chooseLanguage} onChange={this.handleChange}>
                         <option value="English">English</option>
                         <option value="Norwegian">Norwegian</option>
                     </select>
@@ -64,14 +65,14 @@ class WordListContainer extends Component {
                         <option value="Easy">Easy</option>
                         <option value="Medium">Medium</option>
                         <option value="Hard">Hard</option>
-                    </select>>
+                    </select>
                 </form>
-                <button onClick={this.onClick}>Get New Word</button>
+                <button className="getWordButton" onClick={this.onClick}>Get New Word</button>
                 <ul>
-                    <li>Current word is Word{Store["wordDoc"]}</li>
-                    <li>{Store["currentWord"]}</li>
-                    <li>{Store["currentType"]}</li>
-                    <li>{Store["currentCategory"]}</li>
+                    <li className="currentWordIs">Current word is Word:</li>
+                    <li className="wordOutPut">{Store["currentWord"]}</li>
+                    <li className="wordOutPutType">{Store["currentType"]}</li>
+                    <li className="wordOutPutCategory">{Store["currentCategory"]}</li>
                 </ul>
             </section>
         )

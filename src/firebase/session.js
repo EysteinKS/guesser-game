@@ -62,8 +62,11 @@ export const updateActivePlayers = ( changeType ) => {
     let action;
     switch(changeType){
         case("add"):
+            //Create if statement that sees if player is already in the players subcollection
+            addPlayerToSessionPlayers()
             action = Number(SessionStore["activePlayers"]) + 1
             console.log("Adding activePlayer")
+            addPlayerToSessionPlayers()
             break;
         case("remove"):
             console.log("Removing activePlayer")
@@ -83,9 +86,26 @@ export const updateActivePlayers = ( changeType ) => {
             }
             if (UserStore["isInLobby"] == "false"){
                 UserStore.set({ ["ActiveSession"]: "" })
+                //Create function for changing ActiveSession in firestore
             }
         })
         .catch((error) => console.log(error))
+}
+
+export const addPlayerToSessionPlayers = () => {
+    liveSessionsRef.doc(UserStore["ActiveSession"]).collection("Players").doc(UserStore["Username"]).set({
+        username: UserStore["Username"],
+        userid: UserStore["uid"],
+        ready: "true",
+        totalPoints: 0,
+        inSession: true
+    })
+        .then(() => console.log(`${UserStore["Username"]} saved in sessionKey ${SessionStore["SessionKey"]}`))
+        .catch((error) => console.log(error))
+}
+
+export const removePlayerFromSessionPlayers = () => {
+
 }
 
 export const kickPlayer = () => {
@@ -140,12 +160,12 @@ export const joinSession = ( session ) => {
 }
 
 export const joinSessionHost = () => {
-    usersRef.doc(UserStore["uid"]).update({ ActiveSession: UserStore["ActiveSession"] })
+    usersRef.doc(UserStore["uid"]).update({ ActiveSession: UserStore["ActiveSession"], ActiveKey: SessionStore["SessionKey"], hasActiveSession: true })
         .then(() => {
             usersRef.doc(UserStore["uid"]).update({ isInLobby: true })
             addSessionStateListener()
             updateActivePlayers("add")
-            UserStore.set({ ["isInLobby"]: "true" })
+            UserStore.set({ ["isInLobby"]: "true", ["hasActiveSession"]: "true" })
         })
         .catch((error) => console.log(error))
     console.log("Active session in store at joinSession is", UserStore["ActiveSession"])
@@ -153,11 +173,11 @@ export const joinSessionHost = () => {
 }
 
 export const joinSessionNonHost = () => {
-    usersRef.doc(UserStore["uid"]).update({ ActiveSession: UserStore["ActiveSession"] })
+    usersRef.doc(UserStore["uid"]).update({ ActiveSession: UserStore["ActiveSession"], ActiveKey: SessionStore["SessionKey"], hasActiveSession: true })
         .then(() => {
             usersRef.doc(UserStore["uid"]).update({ isInLobby: true })
             addSessionStateListener()
-            UserStore.set({ ["isInLobby"]: "true" })
+            UserStore.set({ ["isInLobby"]: "true", ["hasActiveSession"]: "true" })
         })
         .catch((error) => console.log(error))
     console.log("Active session in store at joinSession is", UserStore["ActiveSession"])

@@ -1,11 +1,13 @@
 import React, { Component } from "react"
 import { session } from "../firebase/index"
 import { SessionStore } from "../store/Store"
+import { SessionStore, UserStore } from "../store/Store"
 
 class CreateSessionContainer extends Component {
     constructor(props){
         super(props)
         SessionStore.addListener(this.onChange)
+        UserStore.addListener(this.onChange)
         this.state = {
             sessionKey: ""
         }
@@ -14,6 +16,7 @@ class CreateSessionContainer extends Component {
 
     componentWillUnmount() {
         SessionStore.removeListener(this.onChange)
+        UserStore.removeListener(this.onChange)
     }
 
     onChange = () => {
@@ -29,11 +32,28 @@ class CreateSessionContainer extends Component {
     }
 
     doJoinSession = ( event ) => {
+
         session.joinSession( this.state.sessionKey )
         event.preventDefault();
     }
 
+    returnToSession = ( event ) => {
+            session.joinSession( UserStore["SessionKey"] )
+            event.preventDefault()
+    }
+
     render(){
+        let activeSessionText;
+        let activeSessionButton;
+
+        if (UserStore["hasActiveSession"] == "true") {
+            activeSessionText = <p>Want to rejoin {UserStore["SessionKey"]}?</p>
+            activeSessionButton = <button onClick={this.returnToSession}>Click Here!</button>
+        } else {
+            activeSessionText = false;
+            activeSessionButton = false;
+        }
+
         return(
            <div className="createJoinSessionGrid">
            <section>
@@ -52,11 +72,18 @@ class CreateSessionContainer extends Component {
                         onChange={this.handleChange}
                         placeholder="CODE">
                     </input>
+<<<<<<< HEAD
                     <div className="joinSessionButton"><input className="createSessionButton" type="submit" value="Join"></input></div>
                     
                     
                 </form>
                 </div>
+=======
+                    <input type="submit" value="Join"></input>
+                </form>
+                <p>{SessionStore["SessionJoinState"]}</p>
+                <span>{activeSessionText}{activeSessionButton}</span>
+>>>>>>> e4d9b36417862a1e7cad26e59df0c53c5ae80f92
             </section>
             </div>   )
     }

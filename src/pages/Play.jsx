@@ -27,7 +27,6 @@ class Play extends Component {
     render(){
 
         let sessionState;
-        console.log(SessionStore["SessionState"])
         console.log("hasActiveSession =", UserStore["hasActiveSession"])
         console.log("isInLobby =", UserStore["isInLobby"])
 

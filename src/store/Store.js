@@ -31,5 +31,7 @@ export const SessionStore = new Listenable({
     initialState: {
         sessionID: "",
         uid: "",
+        returnKey: "",
+        SessionKey: ""
     }
 })

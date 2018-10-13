@@ -15,6 +15,7 @@ export const createSession = () => {
             SessionStore.set({ ["sessionID"]: docRef.id })
             generateKey(docRef.id)
             setKey()
+            createReferenceKey()
             joinSession(SessionStore["sessionID"])
             //Send host to lobby page
         })
@@ -116,6 +117,13 @@ export const setKey = () => {
     console.log(`Saving key as ${SessionStore["SessionKey"]} to sessionID ${SessionStore["sessionID"]}`)
     liveSessionsRef.doc(SessionStore["sessionID"]).update({ sessionID: SessionStore["SessionKey"] })
         .then(() => console.log("Key saved in session database"))
+        .catch((error) => console.log(error))
+}
+
+export const createReferenceKey = () => {
+    console.log(SessionStore["returnKey"])
+    sessionRef.doc("SessionData").collection("SessionKeyReference").doc(SessionStore["SessionKey"]).set({ SessionID: SessionStore["sessionID"] })
+        .then(() => console.log("Session reference created"))
         .catch((error) => console.log(error))
 }
 

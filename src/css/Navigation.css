@@ -1,21 +1,32 @@
 header {
-    background-color: #343F68;
+    background-color: #0a7899;
     margin-top: 0px;
     margin-bottom: 5px;
     padding-top: 10px;
     padding-bottom: 10px;
+    color: white;
+    
+}
+a {
+    text-decoration: none;
+    
 }
 
 header div {
     margin: 0px;
     padding: 0px;
 }
+button.signOut {
+color: black;
 
+}
 .headerList {
     align-content: center;
-    background-color: lightblue;
+    background-color: #0a7899;
     padding: 0px;
     margin: 0px;
+    
+    
 }
 
 .headerLink {
@@ -25,8 +36,11 @@ header div {
     padding: 10px;
     border-bottom: 1px solid black;
     background-clip: padding-box;
+    
 }
-
+.headerLinkText {
+color: white;
+}
 header li:hover {
     background: aqua;
 }

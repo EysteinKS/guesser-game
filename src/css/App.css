@@ -86,7 +86,7 @@ li {
 }
 .joinSession{
 display: grid;
-margin-top: 20px;
+margin-top: 100px;
 
 }
 
@@ -97,6 +97,7 @@ margin-top: 20px;
   font-size: 40px;
   text-align: center;
   background-color: #343f68;
+  color: White;
 }
 .activeSessionGrid{
   display: grid;

@@ -131,6 +131,7 @@ export const joinSession = ( session ) => {
     console.log(`Adding user ${UserStore["Username"]} with uid ${UserStore["uid"]} to session ${session}`)
     if (UserStore["isHost"] == "false"){
         translateKeyToSessionID(session)
+        SessionStore.set({ ["SessionKey"]: session })
         joinSessionNonHost()
     } else {
         SessionStore.set({["activePlayers"]: "0"})

@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import { session } from "../firebase/index"
-import { SessionStore } from "../store/Store"
 import { SessionStore, UserStore } from "../store/Store"
 
 class CreateSessionContainer extends Component {
@@ -72,18 +71,18 @@ class CreateSessionContainer extends Component {
                         onChange={this.handleChange}
                         placeholder="CODE">
                     </input>
-<<<<<<< HEAD
+
                     <div className="joinSessionButton"><input className="createSessionButton" type="submit" value="Join"></input></div>
                     
                     
                 </form>
                 </div>
-=======
-                    <input type="submit" value="Join"></input>
-                </form>
+
+                    
+                
                 <p>{SessionStore["SessionJoinState"]}</p>
                 <span>{activeSessionText}{activeSessionButton}</span>
->>>>>>> e4d9b36417862a1e7cad26e59df0c53c5ae80f92
+ 
             </section>
             </div>   )
     }

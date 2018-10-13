@@ -2,3 +2,4 @@ node_modules/
 .DS_Store
 src/components/CreateSessionContainer.jsx
 src/components/CreateSessionContainer.jsx
+src/components/CreateSessionContainer.jsx

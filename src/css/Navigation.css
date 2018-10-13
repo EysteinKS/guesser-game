@@ -16,13 +16,7 @@ header div {
     margin: 0px;
     padding: 0px;
 }
-.headerLink_signOutButton {
 
-
-}
-.signOutButton{
-
-}
 .headerList {
     align-content: center;
     background-color: #273050;
@@ -51,10 +45,30 @@ color: white;
 
 }
 header li:hover {
-    background: aqua;
+    background: #d95d39;
 }
 .navDrop{
-    display: grid;
-    justify-items: center;
+    
     
 }
+.signOut{
+    color: red;
+    background-color: rgba(250, 235, 215, 0);
+    Border: none;
+    text-align: center;
+    color: white;
+    width: 100vw;
+    padding: 10px;
+    border-bottom: 1px solid black;
+    background-clip: padding-box;
+  }
+  .signOutB{
+    color: red;
+    background-color: rgba(250, 235, 215, 0);
+    text-align: center;
+    color: white;
+    width: 100vw;
+    padding: 10px;
+    border-bottom: 1px solid black;
+    background-clip: padding-box;
+  }

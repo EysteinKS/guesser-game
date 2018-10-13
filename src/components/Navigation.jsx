@@ -31,10 +31,10 @@ class Navigation extends Component {
 const NavigationAuth = () =>
 <div className="navDrop">
 <ul className="headerList">      
-      <li className="headerLink"><Link className="headerLinkText" to={routes.PROFILE}>Profile</Link></li>
-        <li className="headerLink"><Link className="headerLinkText" to={routes.CREATE}>Create</Link></li>
-        <li className="headerLink"><Link className="headerLinkText" to={routes.PLAY}>Play</Link></li>
-        <li className="headerLink_signOutButton"><SignOutButton /></li>
+      <div> <li className="headerLink"><Link className="headerLinkText" to={routes.PROFILE}>Profile</Link></li></div>
+      <div> <li className="headerLink"><Link className="headerLinkText" to={routes.CREATE}>Create</Link></li></div>
+      <div> <li className="headerLink"><Link className="headerLinkText" to={routes.PLAY}>Play</Link></li></div>
+      <div> <li className="headerLink_signOutButton"><SignOutButton /></li></div>
     </ul>
 </div>
 const NavigationNonAuth = () =>

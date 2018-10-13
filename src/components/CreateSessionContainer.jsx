@@ -54,24 +54,38 @@ class CreateSessionContainer extends Component {
 
         return(
             <section>
-                <button onClick={this.doCreateSession}>Create Session</button>
+            <div className="createJoinSessionGrid">
+            
+                <div className="createSession">
+                <button className="createSessionButton" onClick={this.doCreateSession}>Create Session</button>
+                </div>
+
+                <div className="joinSession">
+                <p className="readyToJoinText">{SessionStore["SessionJoinState"]}</p>
                 <form onSubmit={this.doJoinSession}>
-                    <input 
+                    <input className="sessionKeyInput"
                         name="sessionKey"
                         type="text"
                         value={this.state.sessionKey}
                         onChange={this.handleChange}
-                        placeholder="Session Key">
+                        placeholder="Code">
                     </input>
-                    <input type="submit" value="Join"></input>
-                </form>
-                <p>{SessionStore["SessionJoinState"]}</p>
+                    <div>
+                    <input className="createSessionButton" type="submit" value="Join"></input>
+                    </div>
+                    </form>
+                </div>
+
+                
+                
                 {showRejoin
                 ? <div>
-                    <button onClick={this.returnToSession}><p>Click to rejoin {UserStore["SessionKey"]}</p></button>
+                    <button className="createSessionButtonSquere" onClick={this.returnToSession}><p>Click to rejoin {UserStore["SessionKey"]}</p></button>
                 </div>
                 : null}
-                
+
+
+                </div>
             </section>
         )
     }

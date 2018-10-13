@@ -2,8 +2,21 @@ import React, {Component} from "react";
 import WordListContainer from "../components/WordListContainer"
 import { session } from "../firebase/index"
 import "../css/home.css"
+import AuthUserContext from "../AuthUserContext";
+import {SignInForm} from "../components/SignIn"
 
-class Home extends Component {
+const Home = () =>
+  <div>
+    <AuthUserContext.Consumer>
+      { authUser => authUser
+        ? <HomeAuth />
+        : <HomeUnAuth/>
+      }
+      </AuthUserContext.Consumer>
+  </div>
+
+
+class HomeAuth extends Component {
     constructor(props){
         super(props)
     }
@@ -17,8 +30,26 @@ class Home extends Component {
                 <WordListContainer/>
             
             </section>
+            
         )
     }
 }
 
+class HomeUnAuth extends Component {
+    constructor(props){
+        super(props)
+    }
+
+    render(){
+
+        return(
+            <section>
+            <SignInForm/>
+                
+            
+            </section>
+            
+        )
+    }
+}
 export default Home;

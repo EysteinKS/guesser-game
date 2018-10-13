@@ -58,6 +58,15 @@ li {
   border-radius: 25px;
 
 } 
+.createSessionButtonSquere{
+  border: none;
+  color: white;
+  background-color: #343f68;
+  padding: 10px 40px;
+  
+  font-size: 160%;
+ 
+}
 @font-face{
   font-family: "MainFont";
   src: url(GrenadierNF.ttf)
@@ -70,14 +79,17 @@ li {
   
 
 }
+.readyToJoinText{
+  font-size: 160%;
+  color: black;
+  
+}
 .joinSession{
 display: grid;
-margin-top: 5%;
+margin-top: 90px;
 }
 
-.createSessionButton{
-  border:none;
-}
+
 .sessionKeyInput{
   height: 50px;
   width: 140px;
@@ -94,4 +106,7 @@ margin-top: 5%;
 .activeSessionGridPeace{
 display: grid;
 
+}
+signOut{
+  color: red;
 }

@@ -69,7 +69,7 @@ class SignInForm extends React.Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-          <TextField
+          <TextField className="logInInputEmail"
           id="name"
           label="Email"
           type="text"

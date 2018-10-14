@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { SessionStore, UserStore } from "../store/Store"
+import moment from "moment"
 
 class SessionContainer extends Component {
     constructor(props){        
@@ -17,10 +18,15 @@ class SessionContainer extends Component {
     }
 
     render(){
+      
+        
+
         return(
             <section>
-                <p>Session started: {SessionStore["currentTime"]}</p>
+                <p>Session started: {SessionStore["SessionStartTime"]} </p>
                 <p>{SessionStore["activePlayers"]} players</p>
+                
+                
             </section>
         )
     }

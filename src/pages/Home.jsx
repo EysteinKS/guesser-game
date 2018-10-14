@@ -46,9 +46,10 @@ class HomeUnAuth extends Component {
 
         return(
             <section>
-            <SignInForm/>
-            <SignUpLink/>
-            <PasswordForgetLink/>
+            
+            <WordListContainer/>
+            
+            
                 
             
             </section>
@@ -57,3 +58,5 @@ class HomeUnAuth extends Component {
     }
 }
 export default Home;
+
+

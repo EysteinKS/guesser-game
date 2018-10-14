@@ -74,6 +74,9 @@ li {
 .createSession{
 
 }
+.logInInputEmail{
+  width: 30px;
+}
 .createJoinSessionGrid{
   display: grid;
   

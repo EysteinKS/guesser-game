@@ -46,7 +46,7 @@ class CreateSessionContainer extends Component {
 
         let showRejoin
 
-        if (UserStore["hasActiveSession"] = "false"){
+        if (UserStore["hasActiveSession"] = ""){
             showRejoin = false
             console.log("showRejoin = false")
         } else {

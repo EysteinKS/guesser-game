@@ -40,6 +40,7 @@ export const SessionStore = new Listenable({
         returnKey: "",
         SessionKey: "",
         SessionJoinState: "Ready to join session",
-        activePlayers: ""
+        activePlayers: "",
+        currentTime: ""
     }
 })

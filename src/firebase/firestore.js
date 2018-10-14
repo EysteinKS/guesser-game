@@ -4,17 +4,27 @@ import { Store, UserStore, SessionStore } from "../store/Store";
 //Refactoring <3
 
 export const createFirestoreReference = ( arr ) => {
-    let reference = "";
 
-    for ( let i = 0; i < arr.length; i++){
+    console.log("Creating Firestore Reference...")
+    console.log("Input is", arr)
+
+    let reference = arr.join("/")
+
+    /*for ( let i = 0; i < arr.length; i++){
+
         if ( i = arr.length - 2 ) {
+            console.log(arr[i])
             reference = reference + arr[i]
+            console.log(reference)
             i++
         } else {
-            reference = reference + `${arr[i]}/`
+            console.log(arr[i])
+            reference = reference + arr[i] + "/"
+            console.log(reference)
         }
     }
-
+    reference = `${arr[0]}/${arr[1]}/${arr[2]}/${arr[3]}`
+    */
     console.log("FirestoreReference is", reference)
     return reference
 }
@@ -45,8 +55,10 @@ export const getFirestoreDataToStore = ( refString, getVariable, storeRef, store
             } else {
                 setStoreData( storeRef, getVariable, thisVariable )
             }
+            console.log(`Imported ${getVariable} from ${refString} to ${storeRef}`)
         })
-    .catch((error) => console.log(`Error while importing ${getVariable} from ${refString}:`, error))
+        
+        .catch((error) => console.log(`Error while importing ${getVariable} from ${refString}:`, error))
 
     if (storeKey){
         return getStoreData( storeRef, storeKey )

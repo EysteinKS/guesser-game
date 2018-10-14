@@ -107,8 +107,9 @@ class ActiveSession extends Component {
             "LiveSessions",
             SessionStore["sessionID"]
         ]
+        //`Sessions/SessionData/LiveSessions/${SessionStore["sessionID"]}`
         console.log("Getting SessionStartTime from", refStringArray)
-        firestore.getFirestoreDataToStore(`Sessions/SessionData/LiveSessions/${SessionStore["sessionID"]}`, "lobbyCreated", "SessionStore", "SessionStartTime")
+        firestore.getFirestoreDataToStore(firestore.createFirestoreReference(refStringArray), "lobbyCreated", "SessionStore", "SessionStartTime")
     }
 
     leaveSession = () =>

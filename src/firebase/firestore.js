@@ -15,6 +15,7 @@ export const createFirestoreReference = ( arr ) => {
         }
     }
 
+    console.log("FirestoreReference is", reference)
     return reference
 }
 
@@ -32,6 +33,7 @@ const currentWord = Store["currentWord"] //With listener
 */
 
 export const getFirestoreDataToStore = ( refString, getVariable, storeRef, storeKey ) => {
+    console.log("Getting Firestore data")
 
     firestore.doc(refString).get()
         .then((docRef) => {

@@ -31,18 +31,6 @@ export const getTimeStamp = () => {
     SessionStore.set({["currentTime"]: `${dateObj.currentDay}/${dateObj.currentMonth}/${dateObj.currentYear} ${dateObj.currentHour}:${dateObj.currentMinute}:${dateObj.currentSeconds}` })
 }
 
-export const getSessionStartTime = () => {
-
-    let refStringArray = [
-        "Sessions",
-        "SessionData",
-        "LiveSessions",
-        SessionStore["sessionID"]
-    ]
-
-    firestore.getFirestoreDataToStore(refStringArray, "lobbyCreated", "SessionStore", "SessionStartTime")
-}
-
 //Active Sessions and Players
 
 export const changeActiveSessions = ( changeType ) => {

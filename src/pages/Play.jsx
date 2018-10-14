@@ -6,7 +6,7 @@ import SessionContainer from "../components/SessionContainer";
 import CreateSessionContainer from "../components/CreateSessionContainer";
 import LobbyContainer from "../components/LobbyContainer"
 import { UserStore, SessionStore } from "../store/Store"
-import { session } from "../firebase/index"
+import { session, firestore } from "../firebase/index"
 
 class Play extends Component {
     constructor(props){
@@ -98,6 +98,18 @@ class ActiveSession extends Component {
             event.returnValue = "Page Unloaded"
         }
     }
+    
+    getSessionStartTime = () => {
+
+        let refStringArray = [
+            "Sessions",
+            "SessionData",
+            "LiveSessions",
+            SessionStore["sessionID"]
+        ]
+        console.log("Getting SessionStartTime from", refStringArray)
+        firestore.getFirestoreDataToStore(`Sessions/SessionData/LiveSessions/${SessionStore["sessionID"]}`, "lobbyCreated", "SessionStore", "SessionStartTime")
+    }
 
     leaveSession = () =>
         session.leaveSession()
@@ -105,6 +117,10 @@ class ActiveSession extends Component {
     componentDidMount(){
         window.addEventListener("beforeunload", this.onUnload)
         this.setState({ didMount: true })
+    }
+
+    componentWillMount(){
+        this.getSessionStartTime()
     }
 
     componentWillUnmount(){

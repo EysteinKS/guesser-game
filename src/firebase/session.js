@@ -1,5 +1,5 @@
 import { firestore, auth } from "./firebase";
-import { SessionStore, UserStore } from "../store/Store"
+import { SessionStore, UserStore, Store } from "../store/Store"
 
 const sessionRef = firestore.collection("Sessions");
 const liveSessionsRef = sessionRef.doc("SessionData").collection("LiveSessions");

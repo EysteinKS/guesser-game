@@ -101,11 +101,18 @@ class ActiveSession extends Component {
     
     getSessionStartTime = () => {
 
+        let sessionRef
+        if (UserStore["ActiveSession"].length){
+            sessionRef = UserStore["ActiveSession"]
+        } else {
+            sessionRef = SessionStore["sessionID"]
+        }
+
         let refStringArray = [
             "Sessions",
             "SessionData",
             "LiveSessions",
-            SessionStore["sessionID"]
+            sessionRef
         ]
         //`Sessions/SessionData/LiveSessions/${SessionStore["sessionID"]}`
         console.log("Getting SessionStartTime from", refStringArray)

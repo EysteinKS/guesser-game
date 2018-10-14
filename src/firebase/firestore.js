@@ -82,7 +82,7 @@ export const addListenerToFirestore = (refString, getVariable, storeRef, storeKe
     })
 }
 
-export const removeListenerFromFirestore = () => {
+export const removeListenerFromFirestore = (refString) => {
     firestore.doc(refString).onSnapshot((docRef) => {})
     console.log(`Listener to ${refString} removed`)
 }

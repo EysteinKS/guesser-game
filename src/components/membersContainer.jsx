@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { SessionStore, UserStore } from "../store/Store"
 import moment from "moment"
 
-class SessionContainer extends Component {
+class MembersContainer extends Component {
     constructor(props){        
         super(props)
         SessionStore.addListener(this.onChange)
@@ -33,4 +33,4 @@ class SessionContainer extends Component {
 
 }
 
-export default SessionContainer
+export default MembersContainer

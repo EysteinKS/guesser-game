@@ -10,37 +10,9 @@ export const createFirestoreReference = ( arr ) => {
 
     let reference = arr.join("/")
 
-    /*for ( let i = 0; i < arr.length; i++){
-
-        if ( i = arr.length - 2 ) {
-            console.log(arr[i])
-            reference = reference + arr[i]
-            console.log(reference)
-            i++
-        } else {
-            console.log(arr[i])
-            reference = reference + arr[i] + "/"
-            console.log(reference)
-        }
-    }
-    reference = `${arr[0]}/${arr[1]}/${arr[2]}/${arr[3]}`
-    */
     console.log("FirestoreReference is", reference)
     return reference
 }
-
-/* Example usage
-
-const firestoreRefArray = [
-    "Dictionary",
-    "English",
-    "Easy",
-    "Word1"
-]
-const firebaseRef = session.createFirestoreReference( ...firestoreRefArray)
-importFirestoreDataToStore(firebaseRef, "word", "Store", "currentWord" )
-const currentWord = Store["currentWord"] //With listener
-*/
 
 export const getFirestoreDataToStore = ( refString, getVariable, storeRef, storeKey ) => {
     console.log("Getting Firestore data")
